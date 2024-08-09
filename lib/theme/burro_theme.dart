@@ -4,8 +4,7 @@ const Map<String, Color> colorThemes = {
   'backgroundBlack': Color(0xFF171920),
   'surface': Color(0xFF252A34),
   'accent': Color(0xFF74777C),
-  // 'primary': Color(0xff2f64be),
-  'primary': Color.fromARGB(255, 10, 10, 10),
+  'primary': Color.fromARGB(255, 11, 11, 11),
   'secondary': Color(0xFFC923FF),
   'tertiary': Color(0xFFC3D1E4),
   'backgroundError': Color(0xFFF7D7DA),
@@ -27,11 +26,10 @@ class BurritoMobileTheme {
       tertiary: colorThemes['tertiary']!,
       error: colorThemes['danger']!,
       onError: colorThemes['primary']!,
-      // background: _colorThemes['backgroundBlack']!,
-      // onBackground: _colorThemes['primary']!,
       surface: colorThemes['surface']!,
       onSurface: colorThemes['accent']!,
     ),
+    hintColor: const Color.fromARGB(255, 82, 82, 82),
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
         fontFamily: 'OpenSans',
