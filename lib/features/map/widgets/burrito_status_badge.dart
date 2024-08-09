@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:burrito/data/entities/burrito_status.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BurritoStatusBadge extends StatelessWidget {
   final BurritoStatus status;
   static const badgeWidth = 40.0;
   static const badgeHeight = 16.0;
+  static const grayColor = Color(0xFF808080);
 
   const BurritoStatusBadge({super.key, required this.status});
 
@@ -29,25 +31,23 @@ class BurritoStatusBadge extends StatelessWidget {
         );
       case BurritoStatus.loading:
         return Container(
-          // border rounded 8px
-          color: Colors.grey,
+          color: grayColor,
           height: badgeHeight,
           width: badgeWidth,
-          child: const Center(
-            child: SizedBox(
-              height: 12,
-              width: 12,
-              child: CircularProgressIndicator(
-                strokeWidth: 1,
-                valueColor: AlwaysStoppedAnimation(Colors.white),
+          child: SizedBox(
+            height: 12,
+            width: 12,
+            child: Center(
+              child: LoadingAnimationWidget.horizontalRotatingDots(
+                color: Colors.white,
+                size: 16,
               ),
             ),
           ),
         );
       case BurritoStatus.off:
         return Container(
-          // border rounded 8px
-          color: const Color.fromARGB(255, 128, 128, 128),
+          color: grayColor,
           height: badgeHeight,
           width: badgeWidth,
           child: const Center(

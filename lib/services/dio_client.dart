@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 final dio = Dio(
   BaseOptions(
     baseUrl: 'http://elenadb.live:6969',
-    // baseUrl: 'http://192.168.1.86:6969',
     connectTimeout: const Duration(seconds: 10),
     sendTimeout: const Duration(seconds: 10),
     receiveTimeout: const Duration(seconds: 10),
@@ -29,7 +28,7 @@ class BurritoState {
 }
 
 Future<BurritoState> getInfoAcrossTime() async {
-  final response = await dio.get('/get-position/100');
+  final response = await dio.get('/status');
   final burritoInfo = response.data['positions'] as List<dynamic>;
   final lastStopInfo = response.data['last_stop'];
 

@@ -2,17 +2,17 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:burrito/features/map/widgets/app_bottom_bar.dart';
-import 'package:burrito/features/map/widgets/app_top_bar.dart';
-import 'package:burrito/data/geojson/burrito_path.dart';
-import 'package:burrito/data/geojson/bus_stops.dart';
-import 'package:burrito/data/geojson/entrances.dart';
-import 'package:burrito/data/geojson/faculties.dart';
-import 'package:burrito/data/markers/bitmaps.dart';
+import 'package:burrito/data/geojson/unmsm.dart';
 import 'package:burrito/features/map/config.dart';
 import 'package:burrito/services/dio_client.dart';
-import 'package:burrito/data/geojson/unmsm.dart';
+import 'package:burrito/data/markers/bitmaps.dart';
+import 'package:burrito/data/geojson/entrances.dart';
+import 'package:burrito/data/geojson/faculties.dart';
+import 'package:burrito/data/geojson/bus_stops.dart';
+import 'package:burrito/data/geojson/burrito_path.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:burrito/features/map/widgets/app_top_bar.dart';
+import 'package:burrito/features/map/widgets/app_bottom_bar.dart';
 
 class BurritoMap extends StatefulWidget {
   const BurritoMap({super.key});
@@ -53,43 +53,8 @@ class BurritoMapState extends State<BurritoMap> {
     });
   }
 
-  void backgroundPosUpdate() {
-    Timer.periodic(const Duration(seconds: 1), (timer) async {
-      try {
-        final response = await getInfoAcrossTime();
-        final burritoPosIcon = await kBurritoPosIcon;
-
-        setState(() {
-          burritoState = response;
-          loadingLastInfo = false;
-          burritoMarker = Marker(
-            markerId: const MarkerId('burrito'),
-            position: LatLng(
-              burritoState!.lastInfo.pos.latitude,
-              burritoState!.lastInfo.pos.longitude,
-            ),
-            icon: burritoPosIcon,
-            zIndex: 696969,
-            alpha: 0.8,
-          );
-        });
-        if (followBurrito && response.isBurritoVisible) {
-          focusBurritoIfExists();
-        }
-      } catch (e, st) {
-        // ignore: avoid_print
-        print('🫏 Error fetching burrito: $e\n$st');
-        log('Error fetching burrito info', error: e, stackTrace: st);
-        setState(() {
-          loadingLastInfo = true;
-        });
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // final userLocated = userPos != null;
     final userOnBounds = screenCenterLatLng == null
         ? true
         : unmsmSafeBounds.contains(screenCenterLatLng!);
@@ -132,12 +97,12 @@ class BurritoMapState extends State<BurritoMap> {
                 if (!userOnBounds) ...[
                   // Go back button
                   Positioned(
-                    right: 10,
+                    left: 10,
                     bottom: 10,
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.black87, width: 2),
+                        border: Border.all(color: Colors.black87, width: 1.5),
                       ),
                       child: ClipOval(
                         child: Material(
@@ -150,10 +115,12 @@ class BurritoMapState extends State<BurritoMap> {
                               );
                             },
                             child: const SizedBox(
-                              width: 56,
-                              height: 56,
-                              child:
-                                  Icon(Icons.keyboard_return_rounded, size: 32),
+                              width: 48,
+                              height: 48,
+                              child: Icon(
+                                Icons.keyboard_return_rounded,
+                                size: 32,
+                              ),
                             ),
                           ),
                         ),
@@ -163,12 +130,12 @@ class BurritoMapState extends State<BurritoMap> {
                 ],
                 if (burritoState?.isBurritoVisible ?? false) ...[
                   Positioned(
-                    left: 10,
+                    right: 10,
                     bottom: 10,
                     child: Container(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.black87, width: 2),
+                        border: Border.all(color: Colors.black87, width: 1.5),
                       ),
                       child: ClipOval(
                         child: Material(
@@ -184,8 +151,8 @@ class BurritoMapState extends State<BurritoMap> {
                               });
                             },
                             child: SizedBox(
-                              width: 56,
-                              height: 56,
+                              width: 48,
+                              height: 48,
                               child: Icon(
                                 followBurrito ? Icons.stop : Icons.push_pin,
                                 size: 32,
@@ -207,6 +174,40 @@ class BurritoMapState extends State<BurritoMap> {
         ],
       ),
     );
+  }
+
+  void backgroundPosUpdate() {
+    Timer.periodic(const Duration(seconds: 1), (timer) async {
+      try {
+        final response = await getInfoAcrossTime();
+        final burritoPosIcon = await kBurritoPosIcon;
+
+        setState(() {
+          burritoState = response;
+          loadingLastInfo = false;
+          burritoMarker = Marker(
+            markerId: const MarkerId('burrito'),
+            position: LatLng(
+              burritoState!.lastInfo.pos.latitude,
+              burritoState!.lastInfo.pos.longitude,
+            ),
+            icon: burritoPosIcon,
+            zIndex: 696969,
+            alpha: 0.8,
+          );
+        });
+        if (followBurrito && response.isBurritoVisible) {
+          focusBurritoIfExists();
+        }
+      } catch (e, st) {
+        // ignore: avoid_print
+        print('🫏 Error fetching burrito: $e\n$st');
+        log('Error fetching burrito info', error: e, stackTrace: st);
+        setState(() {
+          loadingLastInfo = true;
+        });
+      }
+    });
   }
 
   void _onMapCreated(GoogleMapController controller) {

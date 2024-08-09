@@ -50,7 +50,6 @@ class BurritoTopAppBarState extends State<BurritoTopAppBar>
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Image.asset('assets/logos/unmsm_logo.png', width: 32),
               Stack(
                 children: [
                   Column(
@@ -77,7 +76,10 @@ class BurritoTopAppBarState extends State<BurritoTopAppBar>
                               : Transform(
                                   alignment: Alignment.bottomCenter,
                                   transform: Matrix4.diagonal3Values(
-                                      1, _animation.value, 1),
+                                    1,
+                                    _animation.value,
+                                    1,
+                                  ),
                                   child: child,
                                 );
                         },
@@ -140,7 +142,7 @@ class BurritoTopAppBarState extends State<BurritoTopAppBar>
               ? pickingUp
                   ? const Color(0xFF3E8841)
                   : Colors.red
-              : const Color.fromARGB(255, 58, 58, 58),
+              : const Color(0xFF3A3A3A),
           child: Center(
             child: hasLastStopInfo
                 ? pickingUp
@@ -164,7 +166,7 @@ class BurritoTopAppBarState extends State<BurritoTopAppBar>
                       )
                 : const Text(
                     textAlign: TextAlign.center,
-                    'Aún no hay información disponible',
+                    'No hay información disponible',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 13,
