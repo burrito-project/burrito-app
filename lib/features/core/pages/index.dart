@@ -20,31 +20,32 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          const BurritoTopAppBar(),
-          Expanded(
-            child: Stack(
-              children: [
-                BurritoMap(
+          Column(
+            children: [
+              const BurritoTopAppBar(),
+              Expanded(
+                child: BurritoMap(
                   botomSheetController: _botomSheetController,
                 ),
-                const Positioned(
-                  left: 10,
-                  bottom: kBottomBarHeight - 5,
-                  child: GoBackMapButton(),
-                ),
-                const Positioned(
-                  right: 10,
-                  bottom: kBottomBarHeight - 5,
-                  child: FollowBurritoMapButton(),
-                ),
-                BurritoBottomAppBar(
-                  key: const Key('bottom_sheet'),
-                  controller: _botomSheetController,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: kBottomBarHeight - 12),
+            ],
+          ),
+          const Positioned(
+            left: 10,
+            bottom: kBottomBarHeight,
+            child: GoBackMapButton(),
+          ),
+          const Positioned(
+            right: 10,
+            bottom: kBottomBarHeight,
+            child: FollowBurritoMapButton(),
+          ),
+          BurritoBottomAppBar(
+            key: const Key('bottom_sheet'),
+            controller: _botomSheetController,
           ),
         ],
       ),

@@ -2,7 +2,7 @@ import 'package:burrito/features/core/utils.dart';
 import 'package:burrito/features/map/widgets/bottom_info.dart';
 import 'package:flutter/material.dart';
 
-const kBottomBarHeight = 80.0;
+const kBottomBarHeight = 70.0;
 
 class BurritoBottomAppBar extends StatelessWidget {
   final DraggableScrollableController controller;
