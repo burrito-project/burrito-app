@@ -1,4 +1,4 @@
-enum BurritoStatus {
+enum ServiceStatus {
   working,
   outOfService,
   atRest,
@@ -7,7 +7,7 @@ enum BurritoStatus {
   loading,
   unknown;
 
-  static BurritoStatus fromInt(int value) {
+  static ServiceStatus fromInt(int value) {
     switch (value) {
       case 0:
         return working;

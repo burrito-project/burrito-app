@@ -23,8 +23,8 @@ class BurritoState {
 
   BurritoInfoInTime get lastInfo => inTime.first;
   bool get isBurritoVisible =>
-      lastInfo.status == BurritoStatus.working ||
-      lastInfo.status == BurritoStatus.accident;
+      lastInfo.status == ServiceStatus.working ||
+      lastInfo.status == ServiceStatus.accident;
 }
 
 Future<BurritoState> getInfoAcrossTime() async {
