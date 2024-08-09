@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:burrito/features/map/widgets/map_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/theme/burro_theme.dart';
+import 'package:burrito/features/core/pages/index.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,16 +10,19 @@ void main() {
     SystemUiOverlayStyle(
       statusBarColor: colorThemes['primary'],
       statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarColor: colorThemes['primary'],
       systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.dark,
     ),
   );
   SystemChrome.setEnabledSystemUIMode(
     SystemUiMode.edgeToEdge,
     overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
       title: 'Burrito tracker',
       theme: BurritoMobileTheme.theme,
       home: const SafeArea(
-        child: BurritoMap(),
+        child: BurritoApp(),
       ),
       debugShowCheckedModeBanner: false,
     );

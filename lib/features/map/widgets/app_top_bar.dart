@@ -1,19 +1,45 @@
 import 'package:burrito/data/entities/burrito_status.dart';
 import 'package:burrito/data/entities/last_stop_info.dart';
+import 'package:burrito/features/map/providers/bus_status_provider.dart';
 import 'package:burrito/features/map/widgets/burrito_status_badge.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BurritoTopAppBar extends StatefulWidget {
-  final BurritoState? burritoState;
-
-  const BurritoTopAppBar({super.key, this.burritoState});
+class BurritoTopAppBar extends ConsumerStatefulWidget {
+  const BurritoTopAppBar({super.key});
 
   @override
-  State<BurritoTopAppBar> createState() => BurritoTopAppBarState();
+  ConsumerState<BurritoTopAppBar> createState() => BurritoTopAppBarState();
 }
 
-class BurritoTopAppBarState extends State<BurritoTopAppBar>
+class BurritoTopAppBarState extends ConsumerState<BurritoTopAppBar>
+    with SingleTickerProviderStateMixin {
+  @override
+  Widget build(BuildContext context) {
+    final burritoState = ref.watch(busStatusProvider);
+
+    return burritoState.when(
+      data: (state) => BurritoTopAppBarRender(burritoState: state),
+      error: (e, st) => const BurritoTopAppBarRender(burritoState: null),
+      loading: () => const BurritoTopAppBarRender(burritoState: null),
+    );
+  }
+}
+
+class BurritoTopAppBarRender extends StatefulWidget {
+  final BurritoState? burritoState;
+
+  const BurritoTopAppBarRender({
+    super.key,
+    required this.burritoState,
+  });
+
+  @override
+  State<StatefulWidget> createState() => BurritoTopAppBarRenderState();
+}
+
+class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -33,19 +59,16 @@ class BurritoTopAppBarState extends State<BurritoTopAppBar>
 
   @override
   Widget build(BuildContext context) {
-    final burritoState = widget.burritoState;
-
-    final hasLastStopInfo = burritoState?.lastStop != null;
-    final pickingUp = burritoState?.lastStop?.hasReached ?? false;
-    final isOff = burritoState?.lastInfo.status == BurritoStatus.off;
+    final hasLastStopInfo = widget.burritoState?.lastStop != null;
+    final pickingUp = widget.burritoState?.lastStop?.hasReached ?? false;
+    final isOff = widget.burritoState?.lastInfo.status == ServiceStatus.off;
 
     return Column(
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           height: 90,
-          // color: Theme.of(context).colorScheme.primary,
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.primary,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,8 +83,9 @@ class BurritoTopAppBarState extends State<BurritoTopAppBar>
                         width: 48,
                       ),
                       BurritoStatusBadge(
-                        status: burritoState?.lastInfo.status ??
-                            BurritoStatus.loading,
+                        status: widget.burritoState != null
+                            ? widget.burritoState!.lastInfo.status
+                            : ServiceStatus.off,
                       ),
                     ],
                   ),
@@ -105,7 +129,7 @@ class BurritoTopAppBarState extends State<BurritoTopAppBar>
                       hasLastStopInfo
                           ? pickingUp
                               ? 'Recogiendo pasajeros...'
-                              : 'Próxima estación (${burritoState!.lastStop!.distanceMeters})'
+                              : 'Próxima estación (${widget.burritoState!.lastStop!.distanceMeters})'
                           : '-- --',
                       style: TextStyle(
                         fontSize: 15,
@@ -116,7 +140,7 @@ class BurritoTopAppBarState extends State<BurritoTopAppBar>
                     ),
                     Text(
                       hasLastStopInfo
-                          ? burritoState!.lastStop!.name
+                          ? widget.burritoState!.lastStop!.name
                           : isOff
                               ? 'Fuera de servicio'
                               : 'Esperando al burro...',

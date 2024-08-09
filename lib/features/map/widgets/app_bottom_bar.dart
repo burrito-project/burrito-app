@@ -1,104 +1,73 @@
-import 'dart:async';
-import 'package:burrito/data/entities/positions_response.dart';
-import 'package:burrito/services/dio_client.dart';
+import 'package:burrito/features/core/utils.dart';
+import 'package:burrito/features/map/widgets/bottom_info.dart';
 import 'package:flutter/material.dart';
 
-const kBottomBarHeight = 50.0;
+const kBottomBarHeight = 80.0;
 
-class BurritoBottomAppBar extends StatefulWidget {
-  final BurritoState? burritoState;
+class BurritoBottomAppBar extends StatelessWidget {
+  final DraggableScrollableController controller;
 
-  const BurritoBottomAppBar({super.key, this.burritoState});
+  static double initialFraction = 0.06;
 
-  @override
-  State<BurritoBottomAppBar> createState() => BurritoBottomAppBarState();
-}
-
-class BurritoBottomAppBarState extends State<BurritoBottomAppBar> {
-  Timer? _timer;
-  String timeAgoString = '?';
-
-  @override
-  void initState() {
-    backgroundTimerUpdate();
-    super.initState();
-  }
-
-  void backgroundTimerUpdate() async {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (widget.burritoState != null) {
-          timeAgoString = widget.burritoState!.lastInfo.timestamp.timeAgoString;
-        } else {
-          timeAgoString = '?';
-        }
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
+  const BurritoBottomAppBar({
+    super.key,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final burritoState = widget.burritoState;
+    initialFraction = pixelSizeToScreenFraction(kBottomBarHeight, context);
 
-    return SizedBox(
-      height: kBottomBarHeight,
-      width: MediaQuery.of(context).size.width,
-      child: Container(
-        padding: const EdgeInsets.only(right: 10, left: 8),
-        color: Theme.of(context).colorScheme.primary,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            if (burritoState != null) ...[
-              Row(
-                children: [
-                  const Icon(
-                    Icons.speed_outlined,
-                    color: Colors.white,
-                    size: 18,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    burritoState.lastInfo.velocity.kmphString,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
+    return LayoutBuilder(builder: (ctx, safeArea) {
+      return DraggableScrollableSheet(
+        initialChildSize: initialFraction,
+        minChildSize: initialFraction,
+        maxChildSize: 0.6,
+        snapAnimationDuration: Durations.short4,
+        snap: true,
+        snapSizes: [initialFraction, 0.6],
+        controller: controller,
+        builder: (ctx, scrollController) {
+          return Container(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(8),
+                topRight: Radius.circular(8),
               ),
-              Row(
-                children: [
-                  const Text(
-                    'Actualizado hace',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w200,
-                      fontSize: 15,
-                    ),
+            ),
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).hintColor,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                          ),
+                          height: 4,
+                          width: 40,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                        ),
+                      ),
+                      const BottomBurritoInfo(),
+                      const SizedBox(height: 24),
+                      Image.network(
+                        'https://www.cocacolaep.com/assets/Australia/Vending-Microsite/Coke-Vending_About-Us-Banner__ScaleWidthWzE0NDBd.png',
+                      )
+                    ],
                   ),
-                  const SizedBox(width: 5),
-                  Text(
-                    timeAgoString,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ],
-        ),
-      ),
-    );
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    });
   }
 }
