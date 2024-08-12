@@ -85,7 +85,7 @@ class BurritoMapState extends ConsumerState<BurritoMap> {
       child: GoogleMap(
         mapType: MapType.normal,
         initialCameraPosition: initialPos,
-        padding: const EdgeInsets.only(bottom: 6969, top: 6969),
+        padding: const EdgeInsets.only(bottom: 5, top: 0),
         minMaxZoomPreference: const MinMaxZoomPreference(14, 20),
         compassEnabled: true,
         trafficEnabled: false,
