@@ -3,9 +3,10 @@ import 'package:burrito/data/entities/burrito_status.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BurritoStatusBadge extends StatelessWidget {
-  final ServiceStatus status;
+  final BusServiceStatus status;
   static const badgeWidth = 40.0;
   static const badgeHeight = 16.0;
+  static const fontSize = 14.0;
   static const grayColor = Color(0xFF808080);
 
   const BurritoStatusBadge({super.key, required this.status});
@@ -13,7 +14,7 @@ class BurritoStatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (status) {
-      case ServiceStatus.working:
+      case BusServiceStatus.working:
         return Container(
           color: Colors.red,
           height: badgeHeight,
@@ -24,12 +25,12 @@ class BurritoStatusBadge extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 12,
+                fontSize: fontSize,
               ),
             ),
           ),
         );
-      case ServiceStatus.loading:
+      case BusServiceStatus.loading:
         return Container(
           color: grayColor,
           height: badgeHeight,
@@ -45,7 +46,7 @@ class BurritoStatusBadge extends StatelessWidget {
             ),
           ),
         );
-      case ServiceStatus.off:
+      case BusServiceStatus.off:
         return Container(
           color: grayColor,
           height: badgeHeight,
@@ -56,7 +57,7 @@ class BurritoStatusBadge extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 12,
+                fontSize: fontSize,
               ),
             ),
           ),

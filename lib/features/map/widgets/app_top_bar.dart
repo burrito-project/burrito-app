@@ -61,7 +61,7 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
   Widget build(BuildContext context) {
     final hasLastStopInfo = widget.burritoState?.lastStop != null;
     final pickingUp = widget.burritoState?.lastStop?.hasReached ?? false;
-    final isOff = widget.burritoState?.lastInfo.status == ServiceStatus.off;
+    final isOff = widget.burritoState?.lastInfo.status == BusServiceStatus.off;
 
     return Column(
       children: [
@@ -85,7 +85,7 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                       BurritoStatusBadge(
                         status: widget.burritoState != null
                             ? widget.burritoState!.lastInfo.status
-                            : ServiceStatus.off,
+                            : BusServiceStatus.off,
                       ),
                     ],
                   ),

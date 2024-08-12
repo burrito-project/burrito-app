@@ -4,7 +4,7 @@ import 'package:maps_toolkit/maps_toolkit.dart' as maps_toolkit show LatLng;
 
 class BurritoInfoInTime {
   final LatLng pos;
-  final ServiceStatus status;
+  final BusServiceStatus status;
   final DateTime timestamp;
   final double velocity;
 
@@ -18,7 +18,7 @@ class BurritoInfoInTime {
   factory BurritoInfoInTime.fromJson(Map<String, dynamic> json) {
     return BurritoInfoInTime(
       pos: LatLng(json['lt'], json['lg']),
-      status: ServiceStatus.fromInt(json['sts']),
+      status: BusServiceStatus.fromInt(json['sts']),
       timestamp: DateTime.fromMillisecondsSinceEpoch(
         json['timestamp']['secs_since_epoch'] * 1000 +
             json['timestamp']['nanos_since_epoch'] ~/ 1000000,

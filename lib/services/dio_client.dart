@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 final dio = Dio(
   BaseOptions(
     baseUrl: 'http://elenadb.live:6969',
+    // baseUrl: 'http://192.168.1.86:6969',
     connectTimeout: const Duration(seconds: 10),
     sendTimeout: const Duration(seconds: 10),
     receiveTimeout: const Duration(seconds: 10),
@@ -23,8 +24,8 @@ class BurritoState {
 
   BurritoInfoInTime get lastInfo => inTime.first;
   bool get isBurritoVisible =>
-      lastInfo.status == ServiceStatus.working ||
-      lastInfo.status == ServiceStatus.accident;
+      lastInfo.status == BusServiceStatus.working ||
+      lastInfo.status == BusServiceStatus.accident;
 }
 
 Future<BurritoState> getInfoAcrossTime() async {

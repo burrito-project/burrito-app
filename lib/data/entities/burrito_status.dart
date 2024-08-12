@@ -1,4 +1,4 @@
-enum ServiceStatus {
+enum BusServiceStatus {
   working,
   outOfService,
   atRest,
@@ -7,7 +7,7 @@ enum ServiceStatus {
   loading,
   unknown;
 
-  static ServiceStatus fromInt(int value) {
+  static BusServiceStatus fromInt(int value) {
     switch (value) {
       case 0:
         return working;
