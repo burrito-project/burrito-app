@@ -46,7 +46,7 @@ class BurritoStatusBadge extends StatelessWidget {
             ),
           ),
         );
-      case BusServiceStatus.off:
+      default:
         return Container(
           color: grayColor,
           height: badgeHeight,
@@ -62,8 +62,6 @@ class BurritoStatusBadge extends StatelessWidget {
             ),
           ),
         );
-      default:
-        return Container();
     }
   }
 }

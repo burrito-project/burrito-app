@@ -118,7 +118,7 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                 ],
               ),
               const SizedBox(width: 15),
-              //
+              // Next stop and Status text
               Flexible(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
