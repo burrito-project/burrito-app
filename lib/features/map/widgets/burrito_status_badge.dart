@@ -4,9 +4,9 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class BurritoStatusBadge extends StatelessWidget {
   final BusServiceStatus status;
-  static const badgeWidth = 40.0;
+  static const badgeWidth = 44.0;
   static const badgeHeight = 16.0;
-  static const fontSize = 14.0;
+  static const fontSize = 12.0;
   static const grayColor = Color(0xFF808080);
 
   const BurritoStatusBadge({super.key, required this.status});
