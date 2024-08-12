@@ -14,15 +14,18 @@ final dio = Dio(
 );
 
 class BurritoState {
-  final List<BurritoInfoInTime> inTime;
+  final List<BurritoInfoInTime> records;
   final LastStopInfo? lastStop;
 
   BurritoState({
-    required this.inTime,
+    required this.records,
     required this.lastStop,
   });
 
-  BurritoInfoInTime get lastInfo => inTime.first;
+  /// The newer bus state. Equivalent to state.records.first.
+  /// lastInfo is guaranteed to exists in server response
+  BurritoInfoInTime get lastInfo => records.first;
+
   bool get isBurritoVisible =>
       lastInfo.status == BusServiceStatus.working ||
       lastInfo.status == BusServiceStatus.accident;
@@ -34,7 +37,7 @@ Future<BurritoState> getInfoAcrossTime() async {
   final lastStopInfo = response.data['last_stop'];
 
   return BurritoState(
-    inTime: burritoInfo.map((e) => BurritoInfoInTime.fromJson(e)).toList(),
+    records: burritoInfo.map((e) => BurritoInfoInTime.fromJson(e)).toList(),
     lastStop: lastStopInfo != null ? LastStopInfo.fromJson(lastStopInfo) : null,
   );
 }
