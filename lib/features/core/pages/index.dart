@@ -35,12 +35,12 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
           ),
           const Positioned(
             left: 10,
-            bottom: kBottomBarHeight,
+            bottom: kBottomBarHeight + 25,
             child: GoBackMapButton(),
           ),
           const Positioned(
             right: 10,
-            bottom: kBottomBarHeight,
+            bottom: kBottomBarHeight + 5,
             child: FollowBurritoMapButton(),
           ),
           BurritoBottomAppBar(
