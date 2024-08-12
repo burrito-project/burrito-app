@@ -36,12 +36,14 @@ enum BusServiceStatus {
         return 'Accidente';
       case off:
         return 'Error';
-      default:
-        return 'unknown';
+      case loading:
+        return 'Cargando';
+      case unknown:
+        return 'Desconocido';
     }
   }
 
   bool locatable() {
-    return this == working;
+    return this == working || this == accident;
   }
 }
