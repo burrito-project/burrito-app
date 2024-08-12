@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/theme/burro_theme.dart';
 import 'package:burrito/features/core/pages/index.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
       statusBarColor: colorThemes['primary'],
@@ -20,23 +23,21 @@ void main() {
     SystemUiMode.edgeToEdge,
     overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
   );
-  runApp(const ProviderScope(
-    child: MyApp(),
-  ));
-}
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Burrito tracker',
-      theme: BurritoMobileTheme.theme,
-      home: const SafeArea(
-        child: BurritoApp(),
+  runApp(
+    ProviderScope(
+      child: MaterialApp(
+        title: 'Burrito tracker',
+        theme: BurritoMobileTheme.theme,
+        debugShowCheckedModeBanner: false,
+        home: const SafeArea(
+          child: BurritoApp(),
+        ),
       ),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+    ),
+  );
 }

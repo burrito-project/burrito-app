@@ -43,6 +43,7 @@ dependencies:
   google_maps_flutter_web: ^0.5.10
   loading_animation_widget: ^1.2.1
   flutter_riverpod: ^2.5.1
+  flutter_native_splash: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,10 @@ flutter_launcher_icons:
   macos:
     generate: true
     image_path: "assets/icons/app_icon.png"
+
+flutter_native_splash:
+  color: "#121212"
+  web: false
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
