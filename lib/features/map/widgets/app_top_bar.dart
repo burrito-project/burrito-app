@@ -187,15 +187,25 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                           fontWeight: FontWeight.w400,
                         ),
                       )
-                : const Text(
-                    textAlign: TextAlign.center,
-                    'No hay información disponible',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
+                : isOff
+                    ? const Text(
+                        textAlign: TextAlign.center,
+                        'No hay información disponible',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      )
+                    : const Text(
+                        textAlign: TextAlign.center,
+                        'Se mostrará información apenas esté disponible',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
           ),
         )
       ],
