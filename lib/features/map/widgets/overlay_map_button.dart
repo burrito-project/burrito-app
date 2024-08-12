@@ -12,7 +12,7 @@ class OverlayMapButton extends StatelessWidget {
     required this.buttonActive,
     required this.icon,
     required this.onTap,
-    this.size = 48,
+    this.size = 52,
     this.iconSize = 32,
   });
 
