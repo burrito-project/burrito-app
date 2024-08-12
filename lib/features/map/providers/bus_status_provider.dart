@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -20,8 +21,7 @@ final busStatusProvider = StreamProvider<BurritoState>((ref) async* {
       final response = await getInfoAcrossTime();
       return response;
     } catch (e, st) {
-      // ignore: avoid_print
-      print('🫏 Error fetching burrito: $e\n$st');
+      debugPrint('🫏 Error fetching burrito: $e\n$st');
       log('Error fetching burrito info', error: e, stackTrace: st);
       return null;
     } finally {
