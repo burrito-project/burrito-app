@@ -37,16 +37,32 @@ class BurritoBottomAppBar extends StatelessWidget {
                 topRight: Radius.circular(8),
               ),
             ),
-            child: Column(
-              children: [
-                Center(
-                  child: Container(
-                    height: 4,
-                    width: 40,
-                    margin: const EdgeInsets.symmetric(vertical: 10),
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).hintColor,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                          ),
+                          height: 4,
+                          width: 40,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                        ),
+                      ),
+                      const BottomBurritoInfo(),
+                      const SizedBox(height: 24),
+                      Image.network(
+                        'https://www.cocacolaep.com/assets/Australia/Vending-Microsite/Coke-Vending_About-Us-Banner__ScaleWidthWzE0NDBd.png',
+                      )
+                    ],
                   ),
                 ),
-                const BottomBurritoInfo(),
               ],
             ),
           );
