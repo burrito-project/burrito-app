@@ -30,7 +30,11 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
                   botomSheetController: _botomSheetController,
                 ),
               ),
-              const SizedBox(height: kBottomBarHeight - 12),
+              // const SizedBox(height: kBottomBarHeight - 12),
+              BurritoBottomAppBar(
+                key: const Key('bottom_sheet'),
+                controller: _botomSheetController,
+              ),
             ],
           ),
           const Positioned(
@@ -43,10 +47,10 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
             bottom: kBottomBarHeight + 5,
             child: FollowBurritoMapButton(),
           ),
-          BurritoBottomAppBar(
-            key: const Key('bottom_sheet'),
-            controller: _botomSheetController,
-          ),
+          // BurritoBottomAppBar(
+          //   key: const Key('bottom_sheet'),
+          //   controller: _botomSheetController,
+          // ),
         ],
       ),
     );
