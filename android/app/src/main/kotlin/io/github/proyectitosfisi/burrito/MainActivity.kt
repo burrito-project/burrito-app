@@ -1,4 +1,4 @@
-package io.github.proyectitosfisi.burrito
+package com.contigosanmarcos.burritoapp
 
 import io.flutter.embedding.android.FlutterActivity
 
