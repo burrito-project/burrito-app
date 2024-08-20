@@ -31,7 +31,7 @@ void main() {
   runApp(
     ProviderScope(
       child: MaterialApp(
-        title: 'Burrito tracker',
+        title: 'Contigo Burrito UNMSM',
         theme: BurritoMobileTheme.theme,
         debugShowCheckedModeBanner: false,
         home: const SafeArea(
