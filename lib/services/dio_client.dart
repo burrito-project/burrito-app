@@ -1,7 +1,9 @@
+import 'package:dio/dio.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:burrito/data/entities/burrito_status.dart';
 import 'package:burrito/data/entities/last_stop_info.dart';
 import 'package:burrito/data/entities/positions_response.dart';
-import 'package:dio/dio.dart';
+import 'package:burrito/features/updates/entities/pending_updates_response.dart';
 
 final dio = Dio(
   BaseOptions(
@@ -40,4 +42,15 @@ Future<BurritoState> getInfoAcrossTime() async {
     records: burritoInfo.map((e) => BurritoInfoInTime.fromJson(e)).toList(),
     lastStop: lastStopInfo != null ? LastStopInfo.fromJson(lastStopInfo) : null,
   );
+}
+
+final kPackageInfo = PackageInfo.fromPlatform();
+
+Future<PendingUpdatesResponse> getPendingUpdates() async {
+  final info = await kPackageInfo;
+
+  final response = await dio.get('/pending_updates', queryParameters: {
+    'version': info.version,
+  });
+  return PendingUpdatesResponse.fromJson(response.data);
 }

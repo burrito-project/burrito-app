@@ -45,6 +45,7 @@ dependencies:
   flutter_riverpod: ^2.5.1
   flutter_native_splash: ^2.4.1
   package_info_plus: ^8.0.2
+  localstorage: ^5.0.0
 
 dev_dependencies:
   flutter_test:

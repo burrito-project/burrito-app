@@ -1,3 +1,4 @@
+import 'package:burrito/features/updates/wrappers/pending_updates_wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -35,7 +36,9 @@ void main() {
         theme: BurritoMobileTheme.theme,
         debugShowCheckedModeBanner: false,
         home: const SafeArea(
-          child: BurritoApp(),
+          child: PendingUpdatesWrapper(
+            child: BurritoApp(),
+          ),
         ),
       ),
     ),
