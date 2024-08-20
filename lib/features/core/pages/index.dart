@@ -1,10 +1,10 @@
+import 'package:burrito/features/map/widgets/app_bottom_bar_mobile.dart';
 import 'package:burrito/features/map/widgets/buttons/follow_burrito_button.dart';
 import 'package:burrito/features/map/widgets/buttons/go_back_button.dart';
 import 'package:burrito/features/map/widgets/map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/features/map/widgets/app_top_bar.dart';
-import 'package:burrito/features/map/widgets/app_bottom_bar.dart';
 
 class BurritoApp extends ConsumerStatefulWidget {
   const BurritoApp({super.key});
@@ -31,10 +31,10 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
                 ),
               ),
               // const SizedBox(height: kBottomBarHeight - 12),
-              BurritoBottomAppBar(
-                key: const Key('bottom_sheet'),
-                controller: _botomSheetController,
-              ),
+              // WebBurritoBottomAppBar(
+              //   key: const Key('bottom_sheet'),
+              //   controller: _botomSheetController,
+              // ),
             ],
           ),
           const Positioned(
@@ -47,10 +47,10 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
             bottom: kBottomBarHeight + 5,
             child: FollowBurritoMapButton(),
           ),
-          // BurritoBottomAppBar(
-          //   key: const Key('bottom_sheet'),
-          //   controller: _botomSheetController,
-          // ),
+          MobileBurritoBottomAppBar(
+            key: const Key('bottom_sheet'),
+            controller: _botomSheetController,
+          ),
         ],
       ),
     );
