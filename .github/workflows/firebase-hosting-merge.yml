@@ -7,7 +7,32 @@ on:
     branches:
       - main
 jobs:
-  build_and_deploy:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v4
+        
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: 3.24.0
+
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+          
+      - name: 🛠️ Build the application
+        run: flutter build web -t lib/main_production.dart
+        
+      - name: ⬇️ Archive Production Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-build
+          path: build/web
+          
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
