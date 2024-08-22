@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:store_redirect/store_redirect.dart';
+import 'package:universal_io/io.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class NewVersionDialog extends ConsumerWidget {
   final PendingUpdatesResponse updates;
@@ -203,9 +204,9 @@ class NewVersionDialog extends ConsumerWidget {
                                       ),
                                     ),
                                     ElevatedButton(
-                                      onPressed: () {
+                                      onPressed: () async {
                                         // open store
-                                        StoreRedirect.redirect();
+                                        await openPlayStore();
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor:
@@ -238,6 +239,23 @@ class NewVersionDialog extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> openPlayStore() async {
+    if (Platform.isAndroid || Platform.isIOS) {
+      final appId = Platform.isAndroid
+          ? 'com.contigosanmarcos.burritoapp'
+          : 'io.github.proyectitos-fisi.burrito';
+      final url = Uri.parse(
+        Platform.isAndroid
+            ? "market://details?id=$appId"
+            : "https://apps.apple.com/app/id$appId",
+      );
+      await launchUrl(
+        url,
+        mode: LaunchMode.externalApplication,
+      );
+    }
   }
 
   void openAreYouSureDialog(BuildContext context) {
