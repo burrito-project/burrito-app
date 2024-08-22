@@ -17,6 +17,7 @@ const Map<String, Color> colorThemes = {
 
 class BurritoMobileTheme {
   static ThemeData theme = ThemeData(
+    brightness: Brightness.dark,
     useMaterial3: true,
     colorScheme: ColorScheme(
       brightness: Brightness.dark,
@@ -30,7 +31,7 @@ class BurritoMobileTheme {
       surface: colorThemes['surface']!,
       onSurface: colorThemes['accent']!,
     ),
-    hintColor: const Color.fromARGB(255, 82, 82, 82),
+    hintColor: const Color.fromARGB(255, 102, 102, 102),
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
         fontFamily: 'OpenSans',

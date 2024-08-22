@@ -60,7 +60,7 @@ class AdvertisementsCarouselState
             return Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
-                vertical: 18,
+                vertical: 16,
               ),
               color: Theme.of(context).colorScheme.secondary,
               child: Column(
@@ -74,7 +74,7 @@ class AdvertisementsCarouselState
                       overflow: TextOverflow.ellipsis,
                       fontWeight: FontWeight.normal,
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: 15,
                     ),
                   ),
                   Expanded(
@@ -91,7 +91,7 @@ class AdvertisementsCarouselState
                                 fontWeight: FontWeight.w200,
                                 overflow: TextOverflow.fade,
                                 color: Colors.white,
-                                fontSize: 13,
+                                fontSize: 14,
                               ),
                             ),
                           ),

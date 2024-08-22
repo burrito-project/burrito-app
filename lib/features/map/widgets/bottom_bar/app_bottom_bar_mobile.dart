@@ -1,3 +1,4 @@
+import 'package:burrito/services/dio_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/features/core/utils.dart';
@@ -88,7 +89,44 @@ class MobileBurritoBottomAppBarState
                         ),
                         const SizedBox(height: 12),
                         const AdvertisementsCarousel(),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 12),
+                        FutureBuilder(
+                          future: kPackageInfo,
+                          builder: (ctx, snapshot) {
+                            if (!snapshot.hasData) {
+                              return const SizedBox.shrink();
+                            }
+
+                            final packageInfo = snapshot.data!;
+
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.info_outline,
+                                  color: Theme.of(context).hintColor,
+                                  size: 16,
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  'Contigo Burrito UNMSM',
+                                  style: TextStyle(
+                                    color: Theme.of(context).hintColor,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  'v${packageInfo.version}+${packageInfo.buildNumber}',
+                                  style: TextStyle(
+                                    color: Theme.of(context).hintColor,
+                                    fontSize: 13,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
