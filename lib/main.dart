@@ -1,3 +1,4 @@
+import 'package:localstorage/localstorage.dart';
 import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,10 +8,11 @@ import 'package:burrito/features/core/pages/index.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:burrito/features/app_updates/wrappers/pending_updates_wrapper.dart';
 
-void main() {
+void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   HttpOverrides.global = MyHttpOverrides();
+  await initLocalStorage();
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(

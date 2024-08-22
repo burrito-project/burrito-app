@@ -5,4 +5,5 @@ final isBottomSheetExpandedProvider = StateProvider<bool>((ref) => false);
 
 final bottomSheetControllerProvider =
     StateProvider<DraggableScrollableController>(
-        (ref) => DraggableScrollableController());
+  (ref) => DraggableScrollableController(),
+);

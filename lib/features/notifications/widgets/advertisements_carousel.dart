@@ -35,6 +35,7 @@ class AdvertisementsCarouselState
         autoPlayAnimationDuration: const Duration(
           milliseconds: 500,
         ),
+        pauseAutoPlayOnTouch: true,
         autoPlayCurve: Curves.fastOutSlowIn,
       ),
       items: notifications.when(
@@ -44,11 +45,14 @@ class AdvertisementsCarouselState
           }
           return notificatons.where((n) => !n.isPopup).map((noti) {
             if (noti.isBanner) {
-              return CachedNetworkImage(
-                imageUrl: noti.imageUrl!,
-                // fixed height, and crop to fit the width in the screen
-                height: kBottomAdvertismentHeight,
-                fit: BoxFit.cover,
+              return Container(
+                padding: const EdgeInsets.only(right: 3),
+                child: CachedNetworkImage(
+                  imageUrl: noti.imageUrl!,
+                  // fixed height, and crop to fit the width in the screen
+                  height: kBottomAdvertismentHeight,
+                  fit: BoxFit.cover,
+                ),
               );
             }
 

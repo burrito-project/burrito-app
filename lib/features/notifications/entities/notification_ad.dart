@@ -34,6 +34,8 @@ class NotificationAd {
   final int priority;
   final String createdAt;
   final String updatedAt;
+  // custom fields
+  final bool seen;
 
   NotificationAd({
     required this.id,
@@ -48,6 +50,7 @@ class NotificationAd {
     required this.priority,
     required this.targetUrl,
     required this.updatedAt,
+    this.seen = false,
   });
 
   factory NotificationAd.fromJson(Map<String, dynamic> json) {
@@ -70,4 +73,22 @@ class NotificationAd {
   bool get isBanner => type == AdType.banner;
   bool get isPost => type == AdType.post;
   bool get isPopup => type == AdType.popup;
+
+  NotificationAd withSeen(bool seen) {
+    return NotificationAd(
+      id: id,
+      content: content,
+      title: title,
+      type: type,
+      beginAt: beginAt,
+      createdAt: createdAt,
+      endAt: endAt,
+      imageUrl: imageUrl,
+      isActive: isActive,
+      priority: priority,
+      targetUrl: targetUrl,
+      updatedAt: updatedAt,
+      seen: seen,
+    );
+  }
 }
