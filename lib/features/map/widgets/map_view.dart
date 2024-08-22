@@ -70,7 +70,7 @@ class BurritoMapState extends ConsumerState<BurritoMap> {
           ),
           icon: burritoPosIcon!,
           zIndex: 696969,
-          alpha: 0.8,
+          alpha: 0.9,
         );
       },
     );

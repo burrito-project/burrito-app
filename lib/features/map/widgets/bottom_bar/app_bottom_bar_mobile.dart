@@ -9,7 +9,7 @@ import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
 import 'package:burrito/features/notifications/widgets/advertisements_carousel.dart';
 
 const kBottomBarHeight = 70.0;
-const kBottomAdvertismentHeight = 160.0;
+const kBottomAdvertismentHeight = 150.0;
 
 class MobileBurritoBottomAppBar extends ConsumerStatefulWidget {
   const MobileBurritoBottomAppBar({super.key});
@@ -39,7 +39,7 @@ class MobileBurritoBottomAppBarState
           24 +
           (pendingUpdates.hasValue &&
                   pendingUpdates.valueOrNull!.versions.isNotEmpty
-              ? 32
+              ? 62
               : 0),
       context,
     );
@@ -102,10 +102,7 @@ class MobileBurritoBottomAppBarState
                         ...pendingUpdates.when(
                           data: (r) {
                             if (r.versions.isEmpty) {
-                              return const [
-                                // SizedBox(height: 12),
-                                // Expanded(child: VersionInfo()),
-                              ];
+                              return const [];
                             }
 
                             return [
@@ -117,15 +114,9 @@ class MobileBurritoBottomAppBarState
                             debugPrint(
                               'Error fetching pending updates: $e\n$st',
                             );
-                            return [
-                              // const SizedBox(height: 12),
-                              // const Expanded(child: VersionInfo()),
-                            ];
+                            return [];
                           },
-                          loading: () => [
-                            // const SizedBox(height: 12),
-                            // const Expanded(child: VersionInfo()),
-                          ],
+                          loading: () => [],
                         ),
                       ],
                     ),
