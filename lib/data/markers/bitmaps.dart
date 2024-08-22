@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 final kBurritoPosIcon = BitmapDescriptor.asset(
-  const ImageConfiguration(size: Size(32, 32 * (846 / 750))),
+  const ImageConfiguration(size: Size(30, 30 * (846 / 750))),
   'assets/icons/burrito_marker.png',
 );
 
