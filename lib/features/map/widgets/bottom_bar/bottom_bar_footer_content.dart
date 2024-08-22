@@ -53,27 +53,38 @@ class BottomBarFooterContentState
           ),
           Row(
             children: [
-              // const Text(
-              //   'Actualizado hace',
-              //   style: TextStyle(
-              //     color: Colors.white,
-              //     fontWeight: FontWeight.w200,
-              //     fontSize: 15,
-              //   ),
-              // ),
-              // const SizedBox(width: 5),
-              // Text(
-              //   burritoState.when(
-              //     data: (state) => state.lastInfo.timestamp.timeAgoString,
-              //     error: (e, st) => '?',
-              //     loading: () => '?',
-              //   ),
-              //   style: const TextStyle(
-              //     color: Colors.white,
-              //     fontWeight: FontWeight.w400,
-              //     fontSize: 15,
-              //   ),
-              // ),
+              ...burritoState.when(
+                data: (state) {
+                  if (state.lastInfo.timestamp.timeAgoDuration.inSeconds < 60) {
+                    return [const SizedBox.shrink()];
+                  }
+                  return [
+                    const Text(
+                      'Actualizado hace',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w200,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      burritoState.when(
+                        data: (state) => state.lastInfo.timestamp.timeAgoString,
+                        error: (e, st) => '?',
+                        loading: () => '?',
+                      ),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ];
+                },
+                error: (e, st) => [],
+                loading: () => [],
+              ),
               NotificationsButton(
                 onNotificationsTap: () {
                   if (isBottomSheetExpanded) {

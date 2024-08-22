@@ -38,7 +38,7 @@ extension XBurritoInfo on double {
 extension XBurritoTimeInfo on DateTime {
   // In seconds, minutes, hours
   String get timeAgoString {
-    final diff = DateTime.now().difference(this);
+    final diff = timeAgoDuration;
     if (diff.inSeconds < 60) {
       return '${diff.inSeconds} s';
     } else if (diff.inMinutes < 60) {
@@ -47,6 +47,8 @@ extension XBurritoTimeInfo on DateTime {
       return '${diff.inHours} h';
     }
   }
+
+  Duration get timeAgoDuration => DateTime.now().difference(this);
 }
 
 extension XLatLng on LatLng {
