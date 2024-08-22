@@ -11,8 +11,8 @@ import 'package:burrito/features/app_updates/entities/pending_updates_response.d
 
 final dio = Dio(
   BaseOptions(
-    // baseUrl: 'https://elenadb.live',
-    baseUrl: 'http://192.168.1.86:6969',
+    baseUrl: 'https://api.contigosanmarcos.com',
+    // baseUrl: 'http://192.168.1.86:6969',
     connectTimeout: const Duration(seconds: 10),
     sendTimeout: const Duration(seconds: 10),
     receiveTimeout: const Duration(seconds: 10),
