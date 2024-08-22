@@ -1,3 +1,5 @@
+import 'package:burrito/features/core/fingerprint.dart';
+import 'package:flutter/foundation.dart';
 import 'package:universal_io/io.dart';
 import 'package:dio/dio.dart';
 import 'package:burrito/features/notifications/entities/notification_ad.dart';
@@ -64,4 +66,18 @@ Future<List<NotificationAd>> getNotifications() async {
   return (response.data as List<dynamic>)
       .map((e) => NotificationAd.fromJson(e))
       .toList();
+}
+
+Future<void> registerSession() async {
+  final info = await kPackageInfo;
+
+  try {
+    await dio.post('/session', data: {
+      'fingerprint': UserFingerprint.get(),
+      'last_version': info.version,
+      'platform': Platform.isAndroid ? 'android' : 'ios',
+    });
+  } catch (e, st) {
+    debugPrint('Error registering session: $e\n$st');
+  }
 }

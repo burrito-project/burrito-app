@@ -1,3 +1,5 @@
+import 'package:burrito/features/core/fingerprint.dart';
+import 'package:burrito/services/dio_client.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,9 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   HttpOverrides.global = MyHttpOverrides();
   await initLocalStorage();
+  await UserFingerprint.load();
+
+  registerSession();
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(

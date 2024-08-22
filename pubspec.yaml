@@ -50,6 +50,9 @@ dependencies:
   cached_network_image: ^3.4.1
   universal_io: ^2.2.2
   store_redirect: ^2.0.2
+  device_info_plus: ^10.1.2
+  crypto: ^3.0.5
+  android_id: ^0.4.0
 
 dev_dependencies:
   flutter_test:
