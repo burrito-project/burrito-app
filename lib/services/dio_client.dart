@@ -3,12 +3,12 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:burrito/data/entities/burrito_status.dart';
 import 'package:burrito/data/entities/last_stop_info.dart';
 import 'package:burrito/data/entities/positions_response.dart';
-import 'package:burrito/features/updates/entities/pending_updates_response.dart';
+import 'package:burrito/features/app_updates/entities/pending_updates_response.dart';
 
 final dio = Dio(
   BaseOptions(
-    baseUrl: 'https://elenadb.live',
-    // baseUrl: 'http://192.168.1.86:6969',
+    // baseUrl: 'https://elenadb.live',
+    baseUrl: 'http://192.168.1.86:6969',
     connectTimeout: const Duration(seconds: 10),
     sendTimeout: const Duration(seconds: 10),
     receiveTimeout: const Duration(seconds: 10),
@@ -49,8 +49,10 @@ final kPackageInfo = PackageInfo.fromPlatform();
 Future<PendingUpdatesResponse> getPendingUpdates() async {
   final info = await kPackageInfo;
 
+  // NOTE: don't ever change this code until iOS is supported
   final response = await dio.get('/pending_updates', queryParameters: {
     'version': info.version,
+    'platform': 'android',
   });
   return PendingUpdatesResponse.fromJson(response.data);
 }
