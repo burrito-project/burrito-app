@@ -21,14 +21,15 @@ class NotificationsStateNotifier
   Ref ref;
 
   NotificationsStateNotifier(this.ref) : super(const AsyncValue.loading()) {
-    Timer.periodic(const Duration(seconds: 1), _fetchNotifications);
     _fetchNotifications();
+    final t = Timer.periodic(const Duration(seconds: 30), _fetchNotifications);
 
     ref.listen(isBottomSheetExpandedProvider, (prev, opened) {
       if (opened) {
         triggerOpenNotificationsFeed();
       }
     });
+    ref.onDispose(t.cancel);
   }
 
   void _fetchNotifications([_]) async {

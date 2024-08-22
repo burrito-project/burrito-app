@@ -1,3 +1,5 @@
+import 'package:burrito/features/app_updates/providers/pending_updates_provider.dart';
+import 'package:burrito/features/app_updates/widgets/new_update_button.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,10 +29,17 @@ class MobileBurritoBottomAppBarState
   @override
   Widget build(BuildContext context) {
     final bottomSheetController = ref.watch(bottomSheetControllerProvider);
+    final pendingUpdates = ref.watch(pendingUpdatesProvider);
 
     initialFraction = pixelSizeToScreenFraction(kBottomBarHeight - 5, context);
     maxFraction = pixelSizeToScreenFraction(
-      kBottomAdvertismentHeight + kBottomBarHeight + 72,
+      kBottomAdvertismentHeight +
+          kBottomBarHeight +
+          72 +
+          (pendingUpdates.hasValue &&
+                  pendingUpdates.valueOrNull!.versions.isNotEmpty
+              ? 32
+              : 0),
       context,
     );
 
@@ -63,7 +72,6 @@ class MobileBurritoBottomAppBarState
               ),
               child: CustomScrollView(
                 controller: scrollController,
-                // physics: const ClampingScrollPhysics(),
                 slivers: [
                   SliverFillRemaining(
                     hasScrollBody: false,
@@ -89,43 +97,24 @@ class MobileBurritoBottomAppBarState
                         ),
                         const SizedBox(height: 12),
                         const AdvertisementsCarousel(),
-                        const SizedBox(height: 12),
-                        FutureBuilder(
-                          future: kPackageInfo,
-                          builder: (ctx, snapshot) {
-                            if (!snapshot.hasData) {
-                              return const SizedBox.shrink();
-                            }
-
-                            final packageInfo = snapshot.data!;
-
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.info_outline,
-                                  color: Theme.of(context).hintColor,
-                                  size: 16,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  'Contigo Burrito UNMSM',
-                                  style: TextStyle(
-                                    color: Theme.of(context).hintColor,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  'v${packageInfo.version}+${packageInfo.buildNumber}',
-                                  style: TextStyle(
-                                    color: Theme.of(context).hintColor,
-                                    fontSize: 13,
-                                  ),
-                                ),
-                              ],
+                        ...pendingUpdates.when(
+                          data: (r) => [
+                            const SizedBox(height: 6),
+                            Expanded(child: NewAppUpdateButton(updates: r)),
+                          ],
+                          error: (e, st) {
+                            debugPrint(
+                              'Error fetching pending updates: $e\n$st',
                             );
+                            return [
+                              const SizedBox(height: 12),
+                              const Expanded(child: VersionInfo()),
+                            ];
                           },
+                          loading: () => [
+                            const SizedBox(height: 12),
+                            const Expanded(child: VersionInfo()),
+                          ],
                         ),
                       ],
                     ),
@@ -137,5 +126,50 @@ class MobileBurritoBottomAppBarState
         ),
       );
     });
+  }
+}
+
+class VersionInfo extends StatelessWidget {
+  const VersionInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: kPackageInfo,
+      builder: (ctx, snapshot) {
+        if (!snapshot.hasData) {
+          return const SizedBox.shrink();
+        }
+
+        final packageInfo = snapshot.data!;
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.info_outline,
+              color: Theme.of(context).hintColor,
+              size: 16,
+            ),
+            const SizedBox(width: 5),
+            Text(
+              'Contigo Burrito',
+              style: TextStyle(
+                color: Theme.of(context).hintColor,
+                fontSize: 13,
+              ),
+            ),
+            const SizedBox(width: 5),
+            Text(
+              'v${packageInfo.version}+${packageInfo.buildNumber}',
+              style: TextStyle(
+                color: Theme.of(context).hintColor,
+                fontSize: 13,
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

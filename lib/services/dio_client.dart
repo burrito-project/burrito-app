@@ -1,5 +1,6 @@
-import 'package:burrito/features/notifications/entities/notification_ad.dart';
+import 'package:universal_io/io.dart';
 import 'package:dio/dio.dart';
+import 'package:burrito/features/notifications/entities/notification_ad.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:burrito/data/entities/burrito_status.dart';
 import 'package:burrito/data/entities/last_stop_info.dart';
@@ -53,7 +54,7 @@ Future<PendingUpdatesResponse> getPendingUpdates() async {
   // NOTE: don't ever change this code until iOS is supported
   final response = await dio.get('/pending_updates', queryParameters: {
     'version': info.version,
-    'platform': 'android',
+    'platform': Platform.isAndroid ? 'android' : 'ios',
   });
   return PendingUpdatesResponse.fromJson(response.data);
 }

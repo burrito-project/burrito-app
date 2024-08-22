@@ -1,3 +1,4 @@
+import 'package:burrito/features/app_updates/widgets/new_version_dialog.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -14,39 +15,23 @@ class PendingUpdatesWrapper extends ConsumerStatefulWidget {
   }
 }
 
+const updatePopupsAreAThing = false;
+
 class PendingUpdatesWrapperState extends ConsumerState<PendingUpdatesWrapper> {
   @override
   void initState() {
     super.initState();
 
     if (kIsWeb) return; // web is (well, should be) always up to date
+    // if (!updatePopupsAreAThing) return;
 
     getPendingUpdates().then((response) async {
       if (response.versions.isNotEmpty) {
-        final packageInfo = await kPackageInfo;
-
-        // show dialog
         if (!mounted) return;
-
         await showDialog(
           context: context,
           builder: (context) {
-            return Dialog(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('New version available!'),
-                  Text('Current version: ${packageInfo.version}'),
-                  Text('New version: ${response.versions.first}'),
-                  ElevatedButton(
-                    onPressed: () {
-                      // open store
-                    },
-                    child: const Text('Update'),
-                  ),
-                ],
-              ),
-            );
+            return NewVersionDialog(updates: response);
           },
         );
       }
