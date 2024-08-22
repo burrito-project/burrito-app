@@ -1,5 +1,5 @@
-import 'package:burrito/features/map/widgets/app_bottom_bar_mobile.dart';
-import 'package:burrito/features/map/widgets/bottom_info.dart';
+import 'package:burrito/features/map/widgets/bottom_bar/app_bottom_bar_mobile.dart';
+import 'package:burrito/features/map/widgets/bottom_bar/bottom_bar_footer_content.dart';
 import 'package:flutter/material.dart';
 
 class WebBurritoBottomAppBar extends StatelessWidget {
@@ -19,7 +19,7 @@ class WebBurritoBottomAppBar extends StatelessWidget {
       color: Theme.of(context).colorScheme.primary,
       child: const Padding(
         padding: EdgeInsets.symmetric(vertical: 10),
-        child: BottomBurritoInfo(),
+        child: BottomBarFooterContent(),
       ),
     );
   }

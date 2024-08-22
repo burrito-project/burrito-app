@@ -15,12 +15,7 @@ import 'package:burrito/features/map/providers/map_controller_provider.dart';
 import 'package:burrito/features/map/providers/follow_burrito_provider.dart';
 
 class BurritoMap extends ConsumerStatefulWidget {
-  final DraggableScrollableController botomSheetController;
-
-  const BurritoMap({
-    super.key,
-    required this.botomSheetController,
-  });
+  const BurritoMap({super.key});
 
   @override
   ConsumerState<BurritoMap> createState() => BurritoMapState();
