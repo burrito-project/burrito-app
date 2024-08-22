@@ -35,7 +35,8 @@ class MobileBurritoBottomAppBarState
     maxFraction = pixelSizeToScreenFraction(
       kBottomAdvertismentHeight +
           kBottomBarHeight +
-          72 +
+          // 72 +
+          24 +
           (pendingUpdates.hasValue &&
                   pendingUpdates.valueOrNull!.versions.isNotEmpty
               ? 32
@@ -54,7 +55,8 @@ class MobileBurritoBottomAppBarState
           return true;
         },
         child: DraggableScrollableSheet(
-          initialChildSize: initialFraction,
+          // initialChildSize: initialFraction,
+          initialChildSize: maxFraction,
           minChildSize: initialFraction,
           maxChildSize: maxFraction,
           snapAnimationDuration: Durations.short4,
@@ -95,25 +97,34 @@ class MobileBurritoBottomAppBarState
                           height: 40,
                           child: BottomBarFooterContent(),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 10),
                         const AdvertisementsCarousel(),
                         ...pendingUpdates.when(
-                          data: (r) => [
-                            const SizedBox(height: 6),
-                            Expanded(child: NewAppUpdateButton(updates: r)),
-                          ],
+                          data: (r) {
+                            if (r.versions.isEmpty) {
+                              return const [
+                                // SizedBox(height: 12),
+                                // Expanded(child: VersionInfo()),
+                              ];
+                            }
+
+                            return [
+                              const SizedBox(height: 6),
+                              Expanded(child: NewAppUpdateButton(updates: r)),
+                            ];
+                          },
                           error: (e, st) {
                             debugPrint(
                               'Error fetching pending updates: $e\n$st',
                             );
                             return [
-                              const SizedBox(height: 12),
-                              const Expanded(child: VersionInfo()),
+                              // const SizedBox(height: 12),
+                              // const Expanded(child: VersionInfo()),
                             ];
                           },
                           loading: () => [
-                            const SizedBox(height: 12),
-                            const Expanded(child: VersionInfo()),
+                            // const SizedBox(height: 12),
+                            // const Expanded(child: VersionInfo()),
                           ],
                         ),
                       ],
@@ -156,7 +167,7 @@ class VersionInfo extends StatelessWidget {
               'Contigo Burrito',
               style: TextStyle(
                 color: Theme.of(context).hintColor,
-                fontSize: 13,
+                fontSize: 14,
               ),
             ),
             const SizedBox(width: 5),
