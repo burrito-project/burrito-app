@@ -1,3 +1,4 @@
+import 'package:burrito/features/notifications/entities/notification_ad.dart';
 import 'package:dio/dio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:burrito/data/entities/burrito_status.dart';
@@ -55,4 +56,11 @@ Future<PendingUpdatesResponse> getPendingUpdates() async {
     'platform': 'android',
   });
   return PendingUpdatesResponse.fromJson(response.data);
+}
+
+Future<List<NotificationAd>> getNotifications() async {
+  final response = await dio.get('/notifications');
+  return (response.data as List<dynamic>)
+      .map((e) => NotificationAd.fromJson(e))
+      .toList();
 }
