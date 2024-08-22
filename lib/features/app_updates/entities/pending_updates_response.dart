@@ -8,6 +8,12 @@ class PendingUpdatesResponse {
     required this.mustUpdate,
     required this.versions,
   });
+  RemoteAppVersionInfo? get firstNotMandatory {
+    for (final version in versions) {
+      if (!version.isMandatory) return version;
+    }
+    return null;
+  }
 
   factory PendingUpdatesResponse.fromJson(Map<String, dynamic> json) {
     return PendingUpdatesResponse(

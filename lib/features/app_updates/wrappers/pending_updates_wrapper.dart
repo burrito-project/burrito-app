@@ -28,13 +28,23 @@ class PendingUpdatesWrapperState extends ConsumerState<PendingUpdatesWrapper> {
     getPendingUpdates().then((response) async {
       if (response.versions.isNotEmpty) {
         if (!mounted) return;
+        if (response.versions.isEmpty) return;
+
+        final latestAck = getLatestAcknowledgedVersion() ?? '1.0.0';
+        if (!response.mustUpdate &&
+            latestAck.compareTo(response.versions.first.semver) >= 0) return;
+
+        acknowledgeUpdateBanner(response.firstNotMandatory);
         await showDialog(
           context: context,
+          barrierDismissible: !response.mustUpdate,
           builder: (context) {
             return NewVersionDialog(updates: response);
           },
         );
       }
+    }).catchError((e, st) {
+      debugPrint('Error getting pending updates: $e\n$st');
     });
   }
 

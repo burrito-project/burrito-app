@@ -24,6 +24,7 @@ class NewAppUpdateButton extends ConsumerWidget {
 
         if (!context.mounted) return;
 
+        acknowledgeUpdateBanner(updates.firstNotMandatory);
         await showDialog(
           context: context,
           builder: (context) => NewVersionDialog(updates: updates),
