@@ -22,11 +22,12 @@ class PendingUpdatesWrapperState extends ConsumerState<PendingUpdatesWrapper> {
     if (kIsWeb) return; // web is (well, should be) always up to date
 
     getPendingUpdates().then((response) async {
-      print("🐢${response.versions}");
       if (response.versions.isNotEmpty) {
         final packageInfo = await kPackageInfo;
 
         // show dialog
+        if (!mounted) return;
+
         await showDialog(
           context: context,
           builder: (context) {

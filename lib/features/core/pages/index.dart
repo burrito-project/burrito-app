@@ -1,10 +1,10 @@
-import 'package:burrito/features/map/widgets/app_bottom_bar_mobile.dart';
-import 'package:burrito/features/map/widgets/buttons/follow_burrito_button.dart';
-import 'package:burrito/features/map/widgets/buttons/go_back_button.dart';
-import 'package:burrito/features/map/widgets/map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:burrito/features/map/widgets/map_view.dart';
 import 'package:burrito/features/map/widgets/app_top_bar.dart';
+import 'package:burrito/features/map/widgets/buttons/go_back_button.dart';
+import 'package:burrito/features/map/widgets/buttons/follow_burrito_button.dart';
+import 'package:burrito/features/map/widgets/bottom_bar/app_bottom_bar_mobile.dart';
 
 class BurritoApp extends ConsumerStatefulWidget {
   const BurritoApp({super.key});
@@ -14,21 +14,16 @@ class BurritoApp extends ConsumerStatefulWidget {
 }
 
 class BurritoAppState extends ConsumerState<BurritoApp> {
-  final DraggableScrollableController _botomSheetController =
-      DraggableScrollableController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Column(
+          const Column(
             children: [
-              const BurritoTopAppBar(),
+              BurritoTopAppBar(),
               Expanded(
-                child: BurritoMap(
-                  botomSheetController: _botomSheetController,
-                ),
+                child: BurritoMap(),
               ),
               // const SizedBox(height: kBottomBarHeight - 12),
               // WebBurritoBottomAppBar(
@@ -49,7 +44,6 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
           ),
           MobileBurritoBottomAppBar(
             key: const Key('bottom_sheet'),
-            controller: _botomSheetController,
           ),
         ],
       ),
