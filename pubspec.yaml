@@ -46,6 +46,7 @@ dependencies:
   flutter_native_splash: ^2.4.1
   package_info_plus: ^8.0.2
   localstorage: ^5.0.0
+  flutter_carousel_widget: ^2.3.0
 
 dev_dependencies:
   flutter_test:
