@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
+import 'package:burrito/features/notifications/utils.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,6 +20,7 @@ final notificationsProvider = StateNotifierProvider<NotificationsStateNotifier,
 class NotificationsStateNotifier
     extends StateNotifier<AsyncValue<List<NotificationAd>>> {
   Ref ref;
+  bool firstTime = true;
 
   NotificationsStateNotifier(this.ref) : super(const AsyncValue.loading()) {
     _fetchNotifications();
@@ -35,6 +37,13 @@ class NotificationsStateNotifier
   void _fetchNotifications([_]) async {
     try {
       final notifications = await getNotifications();
+      if (firstTime) {
+        if (notifications.isEmpty) {
+          closeModalBottomSheet(ref);
+        }
+        firstTime = false;
+      }
+
       final seenIds = getSawIds();
 
       final seenCount = notifications.fold(

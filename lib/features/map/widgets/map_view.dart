@@ -138,11 +138,5 @@ class BurritoMapState extends ConsumerState<BurritoMap> {
     if (followBurrito) {
       ref.read(followBurritoProvider.notifier).state = false;
     }
-
-    // widget.botomSheetController.animateTo(
-    //   BurritoBottomAppBar.initialFraction,
-    //   duration: Durations.medium3,
-    //   curve: Curves.easeInOut,
-    // );
   }
 }

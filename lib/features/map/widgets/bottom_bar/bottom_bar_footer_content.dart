@@ -1,4 +1,5 @@
 import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
+import 'package:burrito/features/notifications/utils.dart';
 import 'package:burrito/features/notifications/widgets/notifications_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,7 +18,6 @@ class BottomBarFooterContentState
     extends ConsumerState<BottomBarFooterContent> {
   @override
   Widget build(BuildContext context) {
-    final bottomSheetController = ref.watch(bottomSheetControllerProvider);
     final burritoState = ref.watch(busStatusProvider);
     final isBottomSheetExpanded = ref.watch(isBottomSheetExpandedProvider);
 
@@ -88,17 +88,9 @@ class BottomBarFooterContentState
               NotificationsButton(
                 onNotificationsTap: () {
                   if (isBottomSheetExpanded) {
-                    bottomSheetController.animateTo(
-                      0,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
+                    closeModalBottomSheet2(ref);
                   } else {
-                    bottomSheetController.animateTo(
-                      1,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
+                    openModalBottomSheet2(ref);
                   }
                 },
               ),

@@ -1,8 +1,8 @@
-import 'package:burrito/features/app_updates/entities/pending_updates_response.dart';
-import 'package:burrito/features/app_updates/widgets/new_version_dialog.dart';
-import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:burrito/features/notifications/utils.dart';
+import 'package:burrito/features/app_updates/widgets/new_version_dialog.dart';
+import 'package:burrito/features/app_updates/entities/pending_updates_response.dart';
 
 class NewAppUpdateButton extends ConsumerWidget {
   final PendingUpdatesResponse updates;
@@ -16,11 +16,7 @@ class NewAppUpdateButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () async {
-        ref.read(bottomSheetControllerProvider).animateTo(
-              0,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.ease,
-            );
+        closeModalBottomSheet2(ref);
 
         if (!context.mounted) return;
 

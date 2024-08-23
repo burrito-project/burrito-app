@@ -1,9 +1,9 @@
-import 'package:burrito/features/app_updates/widgets/new_version_dialog.dart';
-import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
-import 'package:burrito/services/dio_client.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:burrito/features/app_updates/widgets/new_version_dialog.dart';
+import 'package:burrito/features/notifications/utils.dart';
+import 'package:burrito/services/dio_client.dart';
 
 class PendingUpdatesWrapper extends ConsumerStatefulWidget {
   final Widget child;
@@ -34,11 +34,7 @@ class PendingUpdatesWrapperState extends ConsumerState<PendingUpdatesWrapper> {
         if (!response.mustUpdate &&
             latestAck.compareTo(response.versions.first.semver) >= 0) return;
 
-        await ref.read(bottomSheetControllerProvider).animateTo(
-              0,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.ease,
-            );
+        await closeModalBottomSheet2(ref);
 
         acknowledgeUpdateBanner(response.firstNotMandatory);
         if (!mounted) return;
