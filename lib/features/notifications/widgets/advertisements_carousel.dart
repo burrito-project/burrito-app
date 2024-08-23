@@ -74,7 +74,7 @@ class AdvertisementsCarouselState
                       overflow: TextOverflow.ellipsis,
                       fontWeight: FontWeight.normal,
                       color: Colors.white,
-                      fontSize: 15,
+                      fontSize: 16,
                     ),
                   ),
                   Expanded(
@@ -91,7 +91,7 @@ class AdvertisementsCarouselState
                                 fontWeight: FontWeight.w200,
                                 overflow: TextOverflow.fade,
                                 color: Colors.white,
-                                fontSize: 14,
+                                fontSize: 15,
                               ),
                             ),
                           ),
