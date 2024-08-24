@@ -21,17 +21,24 @@ class NotificationsButtonState extends ConsumerState<NotificationsButton> {
   Widget build(BuildContext context) {
     final unseen = ref.watch(unseenNotificationsProvider);
 
-    return InkWell(
-      enableFeedback: true,
-      onTap: () {
-        widget.onNotificationsTap.call();
-        ref.read(notificationsProvider.notifier).triggerOpenNotificationsFeed();
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(right: 6, left: 12),
-        child: CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          child: NotificationBellIcon(count: unseen),
+    return Semantics(
+      label: 'Notificaciones',
+      excludeSemantics: true,
+      button: true,
+      child: InkWell(
+        enableFeedback: true,
+        onTap: () {
+          widget.onNotificationsTap.call();
+          ref
+              .read(notificationsProvider.notifier)
+              .triggerOpenNotificationsFeed();
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(right: 6, left: 12),
+          child: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            child: NotificationBellIcon(count: unseen),
+          ),
         ),
       ),
     );

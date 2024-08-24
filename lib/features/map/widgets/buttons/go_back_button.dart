@@ -23,6 +23,7 @@ class GoBackMapButton extends ConsumerWidget {
     }
 
     return OverlayMapButton(
+      semanticLabel: 'Volver a la UNMSM',
       buttonActive: false,
       icon: Icons.keyboard_return_rounded,
       onTap: () {
