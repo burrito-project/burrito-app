@@ -25,6 +25,7 @@ class NotificationsButtonState extends ConsumerState<NotificationsButton> {
       label: 'Notificaciones',
       excludeSemantics: true,
       button: true,
+      enabled: true,
       child: InkWell(
         enableFeedback: true,
         onTap: () {

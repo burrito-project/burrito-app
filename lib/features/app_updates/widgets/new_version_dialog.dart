@@ -277,7 +277,7 @@ class NewVersionDialog extends ConsumerWidget {
                 Navigator.of(context).pop();
               },
               child: const Text(
-                'Cancelar',
+                'Volver',
                 style: TextStyle(
                   color: Colors.white,
                 ),
