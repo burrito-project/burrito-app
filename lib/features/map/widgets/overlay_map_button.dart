@@ -20,20 +20,20 @@ class OverlayMapButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      label: semanticLabel,
-      button: true,
-      enabled: true,
-      onTap: onTap?.call,
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: Colors.black87, width: 1.5),
-        ),
-        child: ClipOval(
-          child: Material(
-            color: buttonActive ? Colors.black : Colors.white,
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.black87, width: 1.5),
+      ),
+      child: ClipOval(
+        child: Material(
+          color: buttonActive ? Colors.black : Colors.white,
+          child: Semantics(
+            label: semanticLabel,
+            button: true,
+            enabled: true,
             child: InkWell(
+              onTap: onTap?.call,
               splashColor: Colors.grey,
               child: SizedBox(
                 width: size,
