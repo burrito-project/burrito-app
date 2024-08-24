@@ -1,12 +1,12 @@
-import 'package:burrito/features/app_updates/providers/pending_updates_provider.dart';
-import 'package:burrito/features/app_updates/widgets/new_update_button.dart';
-import 'package:burrito/services/dio_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:burrito/services/dio_client.dart';
 import 'package:burrito/features/core/utils.dart';
-import 'package:burrito/features/map/widgets/bottom_bar/bottom_bar_footer_content.dart';
 import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
+import 'package:burrito/features/app_updates/widgets/new_update_button.dart';
 import 'package:burrito/features/notifications/widgets/advertisements_carousel.dart';
+import 'package:burrito/features/app_updates/providers/pending_updates_provider.dart';
+import 'package:burrito/features/map/widgets/bottom_bar/bottom_bar_footer_content.dart';
 
 const kBottomBarHeight = 70.0;
 const kBottomAdvertismentHeight = 150.0;
@@ -21,7 +21,7 @@ class MobileBurritoBottomAppBar extends ConsumerStatefulWidget {
 
 class MobileBurritoBottomAppBarState
     extends ConsumerState<MobileBurritoBottomAppBar> {
-  static double initialFraction = 0.06;
+  static double minFraction = 0.06;
   static double maxFraction = 0.4;
 
   bool bottomSheetIsExpanded = false;
@@ -31,11 +31,10 @@ class MobileBurritoBottomAppBarState
     final bottomSheetController = ref.watch(bottomSheetControllerProvider);
     final pendingUpdates = ref.watch(pendingUpdatesProvider);
 
-    initialFraction = pixelSizeToScreenFraction(kBottomBarHeight - 5, context);
+    minFraction = pixelSizeToScreenFraction(kBottomBarHeight - 5, context);
     maxFraction = pixelSizeToScreenFraction(
       kBottomAdvertismentHeight +
           kBottomBarHeight +
-          // 72 +
           24 +
           (pendingUpdates.hasValue &&
                   pendingUpdates.valueOrNull!.versions.isNotEmpty
@@ -44,24 +43,25 @@ class MobileBurritoBottomAppBarState
       context,
     );
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(bottomSheetExpansionProvider.notifier).state =
+          bottomSheetController.size;
+    });
+
     return LayoutBuilder(builder: (ctx, safeArea) {
       return NotificationListener<DraggableScrollableNotification>(
         onNotification: (notification) {
-          final isCurrentlyExpanded = notification.extent >= maxFraction - 0.01;
-          ref.read(isBottomSheetExpandedProvider.notifier).update(
-                (isExpanded) => isCurrentlyExpanded,
-              );
-
+          ref.read(bottomSheetExpansionProvider.notifier).state =
+              notification.extent;
           return true;
         },
         child: DraggableScrollableSheet(
-          // initialChildSize: initialFraction,
           initialChildSize: maxFraction,
-          minChildSize: initialFraction,
+          minChildSize: minFraction,
           maxChildSize: maxFraction,
           snapAnimationDuration: Durations.short4,
           snap: true,
-          snapSizes: [initialFraction, maxFraction],
+          snapSizes: [minFraction, maxFraction],
           controller: bottomSheetController,
           builder: (ctx, scrollController) {
             return Container(
