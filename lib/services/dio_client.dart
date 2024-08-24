@@ -75,7 +75,11 @@ Future<void> registerSession() async {
     await dio.post('/session', data: {
       'fingerprint': UserFingerprint.get(),
       'last_version': info.version,
-      'platform': Platform.isAndroid ? 'android' : 'ios',
+      'platform': kIsWeb
+          ? 'web'
+          : Platform.isAndroid
+              ? 'android'
+              : 'ios',
     });
   } catch (e, st) {
     debugPrint('Error registering session: $e\n$st');
