@@ -3,14 +3,9 @@ import 'package:burrito/features/map/widgets/bottom_bar/bottom_bar_footer_conten
 import 'package:flutter/material.dart';
 
 class WebBurritoBottomAppBar extends StatelessWidget {
-  final DraggableScrollableController controller;
-
   static double initialFraction = 0.06;
 
-  const WebBurritoBottomAppBar({
-    super.key,
-    required this.controller,
-  });
+  const WebBurritoBottomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

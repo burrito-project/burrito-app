@@ -1,3 +1,5 @@
+import 'package:burrito/features/map/widgets/bottom_bar/app_bottom_bar_web.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/features/map/widgets/map_view.dart';
@@ -14,37 +16,56 @@ class BurritoApp extends ConsumerStatefulWidget {
 }
 
 class BurritoAppState extends ConsumerState<BurritoApp> {
+  bool wideScreen = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (kIsWeb) {
+      final double width = MediaQuery.sizeOf(context).width;
+      wideScreen = width > 600;
+    } else {
+      wideScreen = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Stack(
         children: [
           Column(
             children: [
-              BurritoTopAppBar(),
-              Expanded(
+              const BurritoTopAppBar(),
+              const Expanded(
                 child: BurritoMap(),
               ),
-              SizedBox(height: kBottomBarHeight - 12),
-              // WebBurritoBottomAppBar(
-              //   key: const Key('bottom_sheet'),
-              //   controller: _botomSheetController,
-              // ),
+              if (!wideScreen) ...[
+                const SizedBox(height: kBottomBarHeight - 12),
+              ],
+              if (wideScreen) ...[
+                const WebBurritoBottomAppBar(
+                  key: Key('bottom_sheet'),
+                ),
+              ],
             ],
           ),
-          Positioned(
+          const Positioned(
             left: 10,
             bottom: kBottomBarHeight + 25,
             child: GoBackMapButton(),
           ),
-          Positioned(
+          const Positioned(
             right: 10,
             bottom: kBottomBarHeight + 5,
             child: FollowBurritoMapButton(),
           ),
-          MobileBurritoBottomAppBar(
-            key: Key('bottom_sheet'),
-          ),
+          if (!wideScreen) ...[
+            const MobileBurritoBottomAppBar(
+              key: Key('bottom_sheet'),
+            ),
+          ],
         ],
       ),
     );

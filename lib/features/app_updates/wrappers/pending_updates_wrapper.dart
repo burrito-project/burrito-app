@@ -16,15 +16,12 @@ class PendingUpdatesWrapper extends ConsumerStatefulWidget {
   }
 }
 
-const updatePopupsAreAThing = false;
-
 class PendingUpdatesWrapperState extends ConsumerState<PendingUpdatesWrapper> {
   @override
   void initState() {
     super.initState();
 
     if (kIsWeb) return; // web is (well, should be) always up to date
-    // if (!updatePopupsAreAThing) return;
 
     getPendingUpdates().then((response) async {
       if (response.versions.isNotEmpty) {
