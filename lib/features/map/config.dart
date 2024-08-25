@@ -1,7 +1,7 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 const initialPos = CameraPosition(
-  target: LatLng(-12.0555, -77.0844),
+  target: LatLng(-12.0563, -77.0844),
   zoom: 15.8,
   bearing: initialBearing,
 );

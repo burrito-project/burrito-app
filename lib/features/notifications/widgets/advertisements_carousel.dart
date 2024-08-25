@@ -1,10 +1,10 @@
-import 'package:burrito/features/notifications/provider/notifications_provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
+import 'package:burrito/features/notifications/widgets/notification_item.dart';
 import 'package:burrito/features/map/widgets/bottom_bar/app_bottom_bar_mobile.dart';
+import 'package:burrito/features/notifications/provider/notifications_provider.dart';
 
 class AdvertisementsCarousel extends ConsumerStatefulWidget {
   const AdvertisementsCarousel({super.key});
@@ -44,74 +44,7 @@ class AdvertisementsCarouselState
             return [const NotificationsEmpty()];
           }
           return notificatons.where((n) => !n.isPopup).map((noti) {
-            if (noti.isBanner) {
-              return Container(
-                padding: const EdgeInsets.only(right: 3),
-                child: CachedNetworkImage(
-                  imageUrl: noti.imageUrl!,
-                  // fixed height, and crop to fit the width in the screen
-                  height: kBottomAdvertismentHeight,
-                  fit: BoxFit.cover,
-                ),
-              );
-            }
-
-            // Here are ads that look like newspaper posts
-            return Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 16,
-              ),
-              color: Theme.of(context).colorScheme.secondary,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    noti.title!,
-                    maxLines: 2,
-                    style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                      fontWeight: FontWeight.normal,
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 2),
-                            child: Text(
-                              noti.content!,
-                              softWrap: true,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w200,
-                                overflow: TextOverflow.fade,
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        SizedBox(
-                          width: 80,
-                          child: CachedNetworkImage(
-                            imageUrl: noti.imageUrl!,
-                            height: 80,
-                            width: 80,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
+            return NotificationItem(noti: noti);
           }).toList();
         },
         error: (e, st) => [const NotificationsEmpty()],

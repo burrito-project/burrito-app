@@ -27,7 +27,7 @@ class NewAppUpdateButton extends ConsumerWidget {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+        padding: const EdgeInsets.symmetric(vertical: 6),
         child: Container(
           // rounded borders
           decoration: BoxDecoration(
