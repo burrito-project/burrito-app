@@ -34,6 +34,7 @@ class WebSidebarState extends ConsumerState<ConsumerStatefulWidget> {
             final notis = data.where((n) => !n.isPopup).toList();
 
             return ListView.separated(
+              primary: false,
               shrinkWrap: true,
               itemCount: notis.length + 1,
               itemBuilder: (context, index) {
