@@ -90,25 +90,28 @@ class MobileBurritoBottomAppBarState
                           ),
                           const SizedBox(height: 10),
                           const AdvertisementsCarousel(),
-                          ...pendingUpdates.when(
-                            data: (r) {
-                              if (r.versions.isEmpty) {
-                                return const [];
-                              }
+                          if (hasUpdates) ...[
+                            ...pendingUpdates.when(
+                              data: (r) {
+                                if (r.versions.isEmpty) {
+                                  return const [];
+                                }
 
-                              return [
-                                const SizedBox(height: 6),
-                                Expanded(child: NewAppUpdateButton(updates: r)),
-                              ];
-                            },
-                            error: (e, st) {
-                              debugPrint(
-                                'Error fetching pending updates: $e\n$st',
-                              );
-                              return [];
-                            },
-                            loading: () => [],
-                          ),
+                                return [
+                                  const SizedBox(height: 6),
+                                  Expanded(
+                                      child: NewAppUpdateButton(updates: r)),
+                                ];
+                              },
+                              error: (e, st) {
+                                debugPrint(
+                                  'Error fetching pending updates: $e\n$st',
+                                );
+                                return [];
+                              },
+                              loading: () => [],
+                            ),
+                          ],
                         ],
                       ),
                     ),
