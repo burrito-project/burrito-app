@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/features/core/utils.dart';
 import 'package:burrito/features/map/widgets/map_view.dart';
 import 'package:burrito/features/map/widgets/app_top_bar.dart';
+import 'package:burrito/features/notifications/widgets/web_sidebar.dart';
 import 'package:burrito/features/core/providers/responsive_provider.dart';
 import 'package:burrito/features/map/widgets/buttons/go_back_button.dart';
 import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
@@ -25,7 +26,7 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
     super.didChangeDependencies();
 
     final double width = MediaQuery.sizeOf(context).width;
-    wideScreen = width > 600;
+    wideScreen = width > 700;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(wideScreenProvider.notifier).state = wideScreen;
@@ -45,8 +46,15 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
           Column(
             children: [
               const BurritoTopAppBar(),
-              const Expanded(
-                child: BurritoMap(),
+              Expanded(
+                child: Row(
+                  children: [
+                    const Expanded(child: BurritoMap()),
+                    if (wideScreen) ...[
+                      const WebSidebar(),
+                    ]
+                  ],
+                ),
               ),
               if (wideScreen) ...[
                 const WebBurritoBottomAppBar(),
@@ -61,7 +69,7 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
             child: const GoBackMapButton(),
           ),
           Positioned(
-            right: 10,
+            right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
             bottom: padding + 10,
             child: const FollowBurritoMapButton(),
           ),

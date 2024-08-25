@@ -1,7 +1,8 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:burrito/features/core/utils.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
 import 'package:burrito/features/app_updates/widgets/new_update_button.dart';
 import 'package:burrito/features/notifications/widgets/advertisements_carousel.dart';
@@ -35,7 +36,6 @@ class MobileBurritoBottomAppBarState
     maxFraction = pixelSizeToScreenFraction(
       kBottomAdvertismentHeight +
           bottomBarHeight +
-          24 +
           (pendingUpdates.hasValue &&
                   pendingUpdates.valueOrNull!.versions.isNotEmpty
               ? 62
@@ -49,83 +49,86 @@ class MobileBurritoBottomAppBarState
     });
 
     return LayoutBuilder(builder: (ctx, safeArea) {
-      return NotificationListener<DraggableScrollableNotification>(
-        onNotification: (notification) {
-          ref.read(bottomSheetExpansionProvider.notifier).state =
-              notification.extent;
-          return true;
-        },
-        // PointerDeviceKind.mouse
-        child: DraggableScrollableSheet(
-          initialChildSize: maxFraction,
-          minChildSize: minFraction,
-          maxChildSize: maxFraction,
-          snapAnimationDuration: Durations.short4,
-          snap: true,
-          snapSizes: [minFraction, maxFraction],
-          controller: bottomSheetController,
-          builder: (ctx, scrollController) {
-            return Container(
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(8),
-                  topRight: Radius.circular(8),
-                ),
-              ),
-              child: CustomScrollView(
-                controller: scrollController,
-                slivers: [
-                  SliverFillRemaining(
-                    hasScrollBody: false,
-                    fillOverscroll: true,
-                    child: Column(
-                      children: [
-                        Center(
-                          child: Container(
-                            height: 4,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).hintColor,
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                            margin: const EdgeInsets.only(top: 12, bottom: 2),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 40,
-                          child: BottomBarFooterContent(),
-                        ),
-                        const SizedBox(height: 10),
-                        const AdvertisementsCarousel(),
-                        ...pendingUpdates.when(
-                          data: (r) {
-                            if (r.versions.isEmpty) {
-                              return const [];
-                            }
-
-                            return [
-                              const SizedBox(height: 6),
-                              Expanded(child: NewAppUpdateButton(updates: r)),
-                            ];
-                          },
-                          error: (e, st) {
-                            debugPrint(
-                              'Error fetching pending updates: $e\n$st',
-                            );
-                            return [];
-                          },
-                          loading: () => [],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
+      return ScrollConfiguration(
+        behavior: WebMobileScrollBehavior(),
+        child: NotificationListener<DraggableScrollableNotification>(
+          onNotification: (notification) {
+            ref.read(bottomSheetExpansionProvider.notifier).state =
+                notification.extent;
+            return true;
           },
+          // PointerDeviceKind.mouse
+          child: DraggableScrollableSheet(
+            initialChildSize: maxFraction,
+            minChildSize: minFraction,
+            maxChildSize: maxFraction,
+            snapAnimationDuration: Durations.short4,
+            snap: true,
+            snapSizes: [minFraction, maxFraction],
+            controller: bottomSheetController,
+            builder: (ctx, scrollController) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primary,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8),
+                  ),
+                ),
+                child: CustomScrollView(
+                  controller: scrollController,
+                  slivers: [
+                    SliverFillRemaining(
+                      hasScrollBody: false,
+                      fillOverscroll: true,
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Container(
+                              height: 4,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).hintColor,
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                              ),
+                              margin: const EdgeInsets.only(top: 12, bottom: 2),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 40,
+                            child: BottomBarFooterContent(),
+                          ),
+                          const SizedBox(height: 10),
+                          const AdvertisementsCarousel(),
+                          ...pendingUpdates.when(
+                            data: (r) {
+                              if (r.versions.isEmpty) {
+                                return const [];
+                              }
+
+                              return [
+                                const SizedBox(height: 6),
+                                Expanded(child: NewAppUpdateButton(updates: r)),
+                              ];
+                            },
+                            error: (e, st) {
+                              debugPrint(
+                                'Error fetching pending updates: $e\n$st',
+                              );
+                              return [];
+                            },
+                            loading: () => [],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       );
     });
@@ -175,4 +178,13 @@ class VersionInfo extends StatelessWidget {
       },
     );
   }
+}
+
+class WebMobileScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
