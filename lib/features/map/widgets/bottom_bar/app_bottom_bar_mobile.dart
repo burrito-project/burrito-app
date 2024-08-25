@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:burrito/features/core/utils.dart';
@@ -32,14 +33,13 @@ class MobileBurritoBottomAppBarState
     final bottomSheetController = ref.watch(bottomSheetControllerProvider);
     final pendingUpdates = ref.watch(pendingUpdatesProvider);
 
+    final hasUpdates = !kIsWeb &&
+        pendingUpdates.hasValue &&
+        pendingUpdates.valueOrNull!.versions.isNotEmpty;
+
     minFraction = pixelSizeToScreenFraction(bottomBarHeight - 5, context);
     maxFraction = pixelSizeToScreenFraction(
-      kBottomAdvertismentHeight +
-          bottomBarHeight +
-          (pendingUpdates.hasValue &&
-                  pendingUpdates.valueOrNull!.versions.isNotEmpty
-              ? 62
-              : 0),
+      kBottomAdvertismentHeight + 24 + bottomBarHeight + (hasUpdates ? 64 : 0),
       context,
     );
 
@@ -80,22 +80,10 @@ class MobileBurritoBottomAppBarState
                   slivers: [
                     SliverFillRemaining(
                       hasScrollBody: false,
-                      fillOverscroll: true,
+                      fillOverscroll: false,
                       child: Column(
                         children: [
-                          Center(
-                            child: Container(
-                              height: 4,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).hintColor,
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              margin: const EdgeInsets.only(top: 12, bottom: 2),
-                            ),
-                          ),
+                          _draggableTip(),
                           const SizedBox(
                             height: 40,
                             child: BottomBarFooterContent(),
@@ -133,6 +121,20 @@ class MobileBurritoBottomAppBarState
       );
     });
   }
+
+  Widget _draggableTip() => Center(
+        child: Container(
+          height: 4,
+          width: 40,
+          decoration: BoxDecoration(
+            color: Theme.of(context).hintColor,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          margin: const EdgeInsets.only(top: 12, bottom: 2),
+        ),
+      );
 }
 
 class VersionInfo extends StatelessWidget {

@@ -29,7 +29,7 @@ class NotificationItem extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
-          vertical: 16,
+          vertical: 14,
         ),
         color: Theme.of(context).colorScheme.secondary,
         child: Column(
