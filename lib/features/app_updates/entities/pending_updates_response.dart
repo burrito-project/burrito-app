@@ -8,6 +8,9 @@ class PendingUpdatesResponse {
     required this.mustUpdate,
     required this.versions,
   });
+
+  PendingUpdatesResponse.empty() : this(mustUpdate: false, versions: []);
+
   RemoteAppVersionInfo? get firstNotMandatory {
     for (final version in versions) {
       if (!version.isMandatory) return version;
