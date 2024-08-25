@@ -1,11 +1,11 @@
 import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/foundation.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
 import 'package:burrito/theme/burro_theme.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:burrito/features/core/fingerprint.dart';
@@ -49,6 +49,7 @@ void main() async {
   runApp(
     ProviderScope(
       child: MaterialApp(
+        scrollBehavior: WebMobileScrollBehavior(),
         title: 'Contigo Burrito UNMSM',
         theme: BurritoMobileTheme.theme,
         debugShowCheckedModeBanner: false,
@@ -60,4 +61,13 @@ void main() async {
       ),
     ),
   );
+}
+
+class WebMobileScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }

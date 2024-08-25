@@ -1,10 +1,9 @@
 import 'dart:convert';
-
-import 'package:android_id/android_id.dart';
 import 'package:crypto/crypto.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
 import 'package:universal_io/io.dart';
+import 'package:flutter/foundation.dart';
+import 'package:android_id/android_id.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class UserFingerprint {
   static String? _fingerPrint;

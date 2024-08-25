@@ -1,10 +1,10 @@
-import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
-import 'package:burrito/features/notifications/utils.dart';
-import 'package:burrito/features/notifications/widgets/notifications_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:burrito/features/notifications/utils.dart';
 import 'package:burrito/data/entities/positions_response.dart';
 import 'package:burrito/features/map/providers/bus_status_provider.dart';
+import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
+import 'package:burrito/features/notifications/widgets/notifications_button.dart';
 
 class BottomBarFooterContent extends ConsumerStatefulWidget {
   const BottomBarFooterContent({super.key});

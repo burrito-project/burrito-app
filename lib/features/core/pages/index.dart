@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/features/core/utils.dart';
 import 'package:burrito/features/map/widgets/map_view.dart';
 import 'package:burrito/features/map/widgets/app_top_bar.dart';
+import 'package:burrito/features/core/providers/responsive_provider.dart';
 import 'package:burrito/features/map/widgets/buttons/go_back_button.dart';
 import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
 import 'package:burrito/features/map/widgets/buttons/follow_burrito_button.dart';
@@ -24,18 +24,20 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (kIsWeb) {
-      final double width = MediaQuery.sizeOf(context).width;
-      wideScreen = width > 600;
-    } else {
-      wideScreen = false;
-    }
+    final double width = MediaQuery.sizeOf(context).width;
+    wideScreen = width > 600;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(wideScreenProvider.notifier).state = wideScreen;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final expansion = ref.watch(bottomSheetExpansionProvider);
-    final padding = screenFractionToPixelSize(expansion, context);
+    final padding = wideScreen
+        ? WebBurritoBottomAppBar.bottomBarHeight
+        : screenFractionToPixelSize(expansion, context);
 
     return Scaffold(
       body: Stack(

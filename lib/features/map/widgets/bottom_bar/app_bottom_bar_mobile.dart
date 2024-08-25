@@ -8,7 +8,6 @@ import 'package:burrito/features/notifications/widgets/advertisements_carousel.d
 import 'package:burrito/features/app_updates/providers/pending_updates_provider.dart';
 import 'package:burrito/features/map/widgets/bottom_bar/bottom_bar_footer_content.dart';
 
-const kBottomBarHeight = 70.0;
 const kBottomAdvertismentHeight = 150.0;
 
 class MobileBurritoBottomAppBar extends ConsumerStatefulWidget {
@@ -21,6 +20,7 @@ class MobileBurritoBottomAppBar extends ConsumerStatefulWidget {
 
 class MobileBurritoBottomAppBarState
     extends ConsumerState<MobileBurritoBottomAppBar> {
+  static const bottomBarHeight = 70.0;
   static double minFraction = 0.06;
   static double maxFraction = 0.4;
 
@@ -31,10 +31,10 @@ class MobileBurritoBottomAppBarState
     final bottomSheetController = ref.watch(bottomSheetControllerProvider);
     final pendingUpdates = ref.watch(pendingUpdatesProvider);
 
-    minFraction = pixelSizeToScreenFraction(kBottomBarHeight - 5, context);
+    minFraction = pixelSizeToScreenFraction(bottomBarHeight - 5, context);
     maxFraction = pixelSizeToScreenFraction(
       kBottomAdvertismentHeight +
-          kBottomBarHeight +
+          bottomBarHeight +
           24 +
           (pendingUpdates.hasValue &&
                   pendingUpdates.valueOrNull!.versions.isNotEmpty
@@ -55,6 +55,7 @@ class MobileBurritoBottomAppBarState
               notification.extent;
           return true;
         },
+        // PointerDeviceKind.mouse
         child: DraggableScrollableSheet(
           initialChildSize: maxFraction,
           minChildSize: minFraction,
