@@ -33,6 +33,7 @@
     .bottomLeft { position: absolute; bottom: 0; left: 0; }
     .bottomRight { position: absolute; bottom: 0; right: 0; }
   </style>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
 
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
@@ -47,5 +48,14 @@
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRcs9q7McYShBakc4mwWAAygj-mxZ_nt8"></script>
 </head>
 <body>
+  <div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+  </div>
+
+  <script>
+      $(window).on("load",function(){
+        $(".loader-wrapper").fadeOut("slow");
+      });
+  </script>
 </body>
 </html>
