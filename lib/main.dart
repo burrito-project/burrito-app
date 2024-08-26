@@ -54,11 +54,7 @@ void main() async {
         debugShowCheckedModeBanner: false,
         home: const SafeArea(
           child: PendingUpdatesWrapper(
-            child: kIsWeb
-                ? LoadingScreen() // Show LoadingScreen on the web
-                : PendingUpdatesWrapper(
-                    child: BurritoApp(),
-                  ),
+            child: BurritoApp(),
           ),
         ),
       ),
