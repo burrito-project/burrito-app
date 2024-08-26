@@ -15,12 +15,6 @@ import 'package:burrito/features/core/http_override.dart'
 import 'package:burrito/features/app_updates/wrappers/pending_updates_wrapper.dart';
 
 void main() async {
-  runApp(
-    const ProviderScope(
-      child: LoadingScreen(),
-    ),
-  );
-
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   if (!kIsWeb) {
@@ -60,7 +54,11 @@ void main() async {
         debugShowCheckedModeBanner: false,
         home: const SafeArea(
           child: PendingUpdatesWrapper(
-            child: BurritoApp(),
+            child: kIsWeb
+                ? LoadingScreen() // Show LoadingScreen on the web
+                : PendingUpdatesWrapper(
+                    child: BurritoApp(),
+                  ),
           ),
         ),
       ),

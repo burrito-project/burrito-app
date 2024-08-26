@@ -11,6 +11,7 @@ class LoadingScreen extends StatelessWidget {
       body: Center(
         child: SpinKitCubeGrid(
           size: 140,
+          duration: const Duration(seconds: 2),
           color: Colors.white,
         ),
       ),
