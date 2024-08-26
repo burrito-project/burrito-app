@@ -14,6 +14,12 @@ import 'package:burrito/features/core/http_override.dart'
 import 'package:burrito/features/app_updates/wrappers/pending_updates_wrapper.dart';
 
 void main() async {
+  runApp(
+    const ProviderScope(
+      child: LoadingScreen(),
+    ),
+  );
+
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   if (!kIsWeb) {
