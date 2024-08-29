@@ -1,4 +1,3 @@
-import 'package:burrito/features/map/widgets/loading_screen.dart';
 import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
