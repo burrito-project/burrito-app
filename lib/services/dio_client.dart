@@ -38,7 +38,14 @@ class BurritoState {
 }
 
 Future<BurritoState> getInfoAcrossTime() async {
-  final response = await dio.get('/status');
+  final response = await dio.get(
+    '/status',
+    options: Options(
+      headers: {
+        'ngrok-skip-browser-warning': '1',
+      },
+    ),
+  );
   final burritoInfo = response.data['positions'] as List<dynamic>;
   final lastStopInfo = response.data['last_stop'];
 
