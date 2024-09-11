@@ -70,8 +70,15 @@
   </style>
 
   <script id="splash-screen-script">
+    let shown = false;
+
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
+
+      if (!shown) {
+        alert('Gracias por participar en las pruebas de hoy ❤️! Continuaremos mañana 🚍');
+        shown = true;
+      }
     }
   </script>
 
