@@ -1,9 +1,8 @@
-import 'package:burrito/features/map/widgets/bottom_bar/app_bottom_bar_mobile.dart';
-import 'package:burrito/features/notifications/entities/notification_ad.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
+import 'package:float_column/float_column.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:burrito/features/notifications/entities/notification_ad.dart';
 
 class NotificationItem extends ConsumerWidget {
   final NotificationAd noti;
@@ -17,8 +16,7 @@ class NotificationItem extends ConsumerWidget {
         padding: const EdgeInsets.only(right: 3),
         child: CachedNetworkImage(
           imageUrl: noti.imageUrl!,
-          // fixed height, and crop to fit the width in the screen
-          height: kBottomAdvertismentHeight,
+          width: double.infinity,
           fit: BoxFit.cover,
         ),
       );
@@ -47,10 +45,6 @@ class NotificationItem extends ConsumerWidget {
               ),
             ),
             FloatColumn(
-              // textAlign: TextAlign.start,
-              // overflow: TextOverflow.ellipsis,
-              // text:>
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Floatable(
                   float: FCFloat.start,

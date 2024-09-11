@@ -19,7 +19,7 @@ class UserFingerprint {
 
   static Future<void> load() async {
     final fingerprint = await _getDeviceFingerprint();
-    debugPrint('🆔 loaded fingerprint: $fingerprint');
+    // debugPrint('🆔 loaded fingerprint: $fingerprint');
     _fingerPrint = fingerprint;
     _loaded = true;
   }

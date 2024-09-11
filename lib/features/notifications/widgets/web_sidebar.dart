@@ -28,27 +28,43 @@ class WebSidebarState extends ConsumerState<ConsumerStatefulWidget> {
       alignment: Alignment.topCenter,
       width: WebSidebar.maxWidth,
       color: Colors.black,
-      child: SingleChildScrollView(
-        child: notifications.when(
-          data: (data) {
-            final notis = data.where((n) => !n.isPopup).toList();
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12).copyWith(left: 16),
+            child: const Text(
+              'Notificationes',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            child: notifications.when(
+              data: (data) {
+                final notis = data.where((n) => !n.isPopup).toList();
 
-            return ListView.separated(
-              primary: false,
-              shrinkWrap: true,
-              itemCount: notis.length + 1,
-              itemBuilder: (context, index) {
-                if (index == notis.length) return const SizedBox();
-                return NotificationItem(noti: notis[index]);
+                return ListView.separated(
+                  primary: false,
+                  shrinkWrap: true,
+                  itemCount: notis.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == notis.length) return const SizedBox();
+                    return NotificationItem(noti: notis[index]);
+                  },
+                  separatorBuilder: (context, index) {
+                    return const CustomDivider(height: 8);
+                  },
+                );
               },
-              separatorBuilder: (context, index) {
-                return const CustomDivider(height: 8);
-              },
-            );
-          },
-          error: (e, st) => const SizedBox.shrink(),
-          loading: () => const SizedBox.shrink(),
-        ),
+              error: (e, st) => const SizedBox.shrink(),
+              loading: () => const SizedBox.shrink(),
+            ),
+          ),
+        ],
       ),
     );
   }
