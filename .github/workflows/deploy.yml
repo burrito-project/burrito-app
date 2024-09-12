@@ -42,9 +42,9 @@ jobs:
           name: web-build
           path: build/web
 
-      - name: 🚀 Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: 🚀 Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
-          publish_branch: gh-pages
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: 'burrito-app'
+          directory: 'build/web'
