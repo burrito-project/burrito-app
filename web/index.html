@@ -71,12 +71,16 @@
 
   <script id="splash-screen-script">
     let shown = false;
+    let today = new Date().getDay();
+    let isWeekend = today === 0 || today === 6;
 
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
 
       if (!shown) {
-        // alert('Ya estamos en vivo! 🚍');
+        if (isWeekend) {
+          alert('No hay burrito los fines de semana. Volveremos el lunes ❤️🚍');
+        }
         shown = true;
       }
     }

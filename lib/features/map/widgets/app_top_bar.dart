@@ -65,6 +65,11 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
     final isOff = widget.burritoState == null ||
         widget.burritoState?.lastInfo.status == BusServiceStatus.off;
 
+    final today = DateTime.now().toLocal();
+    // The burrito is off on weekends
+    final isWeekend =
+        today.weekday == DateTime.saturday || today.weekday == DateTime.sunday;
+
     return Column(
       children: [
         Container(
@@ -138,7 +143,7 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                       ),
                     ],
                     Text(
-                      isOff
+                      isWeekend || isOff
                           ? 'Fuera de servicio'
                           : hasLastStop
                               ? widget.burritoState!.lastStop!.name
