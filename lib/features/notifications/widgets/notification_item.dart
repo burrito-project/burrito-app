@@ -24,57 +24,59 @@ class NotificationItem extends ConsumerWidget {
 
     // Here are ads that look like newspaper posts
     return SelectionArea(
-      child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 14,
-        ),
-        color: Theme.of(context).colorScheme.secondary,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              noti.title!,
-              maxLines: 2,
-              style: const TextStyle(
-                overflow: TextOverflow.ellipsis,
-                fontWeight: FontWeight.normal,
-                color: Colors.white,
-                fontSize: 16,
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 14,
+          ),
+          color: Theme.of(context).colorScheme.secondary,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                noti.title!,
+                maxLines: 2,
+                style: const TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                  fontSize: 16,
+                ),
               ),
-            ),
-            FloatColumn(
-              children: [
-                Floatable(
-                  float: FCFloat.start,
-                  padding: const EdgeInsets.only(right: 16, top: 8),
-                  child: SizedBox(
-                    width: 80,
-                    child: CachedNetworkImage(
-                      imageUrl: noti.imageUrl!,
-                      height: 80,
-                      width: 80,
-                      fit: BoxFit.cover,
+              FloatColumn(
+                children: [
+                  Floatable(
+                    float: FCFloat.start,
+                    padding: const EdgeInsets.only(right: 16, top: 8),
+                    child: SizedBox(
+                      width: 75,
+                      child: CachedNetworkImage(
+                        imageUrl: noti.imageUrl!,
+                        height: 75,
+                        width: 75,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                WrappableText(
-                  padding: const EdgeInsets.only(top: 4),
-                  text: TextSpan(
-                    text: noti.content!,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w200,
-                      overflow: TextOverflow.fade,
-                      color: Colors.white,
-                      fontSize: 15,
+                  WrappableText(
+                    padding: const EdgeInsets.only(top: 4),
+                    text: TextSpan(
+                      text: noti.content!,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w200,
+                        overflow: TextOverflow.fade,
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(width: 4),
-              ],
-            ),
-          ],
+                  const SizedBox(width: 4),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

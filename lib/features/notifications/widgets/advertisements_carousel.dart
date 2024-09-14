@@ -22,7 +22,7 @@ class AdvertisementsCarouselState
     final notifications = ref.watch(notificationsProvider);
 
     return FlutterCarousel(
-      options: CarouselOptions(
+      options: FlutterCarouselOptions(
         height: kBottomAdvertismentHeight,
         enableInfiniteScroll: false,
         enlargeCenterPage: false,
@@ -31,7 +31,7 @@ class AdvertisementsCarouselState
         showIndicator: false,
         padEnds: false,
         autoPlay: isBottomSheetExpanded,
-        autoPlayInterval: const Duration(seconds: 10),
+        autoPlayInterval: const Duration(seconds: 4),
         autoPlayAnimationDuration: const Duration(
           milliseconds: 500,
         ),
