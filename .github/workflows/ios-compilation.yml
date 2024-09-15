@@ -38,6 +38,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/ios/iphoneos/FlutterIpaExport.ipa
-          tag: v1.0.0
+          tag: IOS v1.0.0
           overwrite: true
           body: "Release notes"
