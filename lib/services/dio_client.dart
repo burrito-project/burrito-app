@@ -39,7 +39,7 @@ class BurritoState {
 
 Future<BurritoState> getInfoAcrossTime() async {
   final response = await dio.get(
-    '/status',
+    '/status?count=1',
     options: Options(
       headers: {
         'ngrok-skip-browser-warning': '1',

@@ -42,26 +42,29 @@ class WebSidebarState extends ConsumerState<ConsumerStatefulWidget> {
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: notifications.when(
-              data: (data) {
-                final notis = data.where((n) => !n.isPopup).toList();
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: notifications.when(
+                data: (data) {
+                  final notis = data.where((n) => !n.isPopup).toList();
 
-                return ListView.separated(
-                  primary: false,
-                  shrinkWrap: true,
-                  itemCount: notis.length + 1,
-                  itemBuilder: (context, index) {
-                    if (index == notis.length) return const SizedBox();
-                    return NotificationItem(noti: notis[index]);
-                  },
-                  separatorBuilder: (context, index) {
-                    return const CustomDivider(height: 8);
-                  },
-                );
-              },
-              error: (e, st) => const SizedBox.shrink(),
-              loading: () => const SizedBox.shrink(),
+                  return ListView.separated(
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: notis.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index == notis.length) return const SizedBox();
+                      return NotificationItem(noti: notis[index]);
+                    },
+                    separatorBuilder: (context, index) {
+                      return const CustomDivider(height: 8);
+                    },
+                  );
+                },
+                error: (e, st) => const SizedBox.shrink(),
+                loading: () => const SizedBox.shrink(),
+              ),
             ),
           ),
         ],
