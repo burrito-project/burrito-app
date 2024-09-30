@@ -31,7 +31,7 @@ class AdvertisementsCarouselState
         showIndicator: false,
         padEnds: false,
         autoPlay: isBottomSheetExpanded,
-        autoPlayInterval: const Duration(seconds: 4),
+        autoPlayInterval: const Duration(seconds: 3),
         autoPlayAnimationDuration: const Duration(
           milliseconds: 500,
         ),
