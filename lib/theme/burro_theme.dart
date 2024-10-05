@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const Map<String, Color> colorThemes = {
   'backgroundBlack': Color(0xFF171920),
   'surface': Color.fromARGB(255, 17, 18, 20),
+  'surfaceContainer': Color.fromARGB(255, 39, 41, 43),
   'accent': Color(0xFF74777C),
   'primary': Color.fromARGB(255, 11, 11, 11),
   'secondary': Color.fromARGB(255, 24, 24, 24),
@@ -30,6 +31,7 @@ class BurritoMobileTheme {
       onError: colorThemes['primary']!,
       surface: colorThemes['surface']!,
       onSurface: colorThemes['accent']!,
+      surfaceContainer: colorThemes['surfaceContainer']!,
     ),
     hintColor: const Color.fromARGB(255, 102, 102, 102),
     textTheme: const TextTheme(
