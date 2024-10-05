@@ -27,7 +27,7 @@ class SimpleAppDialog extends ConsumerWidget {
             return ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight: constraints.maxHeight * 0.20,
-                maxHeight: 200,
+                maxHeight: 230,
                 minWidth: double.infinity,
               ),
               child: Column(

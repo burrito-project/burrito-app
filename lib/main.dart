@@ -1,3 +1,4 @@
+import 'package:burrito/features/app_updates/wrappers/popup_notifications_wrapper.dart';
 import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -52,8 +53,10 @@ void main() async {
         theme: BurritoMobileTheme.theme,
         debugShowCheckedModeBanner: false,
         home: const SafeArea(
-          child: PendingUpdatesWrapper(
-            child: BurritoApp(),
+          child: PopupNotificationsWrapper(
+            child: PendingUpdatesWrapper(
+              child: BurritoApp(),
+            ),
           ),
         ),
       ),

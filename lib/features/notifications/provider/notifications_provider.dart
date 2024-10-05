@@ -21,6 +21,7 @@ class NotificationsStateNotifier
     extends StateNotifier<AsyncValue<List<NotificationAd>>> {
   Ref ref;
   bool firstTime = true;
+  FutureOr<List<NotificationAd>>? _initialFuture;
 
   NotificationsStateNotifier(this.ref) : super(const AsyncValue.loading()) {
     _fetchNotifications();
@@ -36,7 +37,8 @@ class NotificationsStateNotifier
 
   void _fetchNotifications([_]) async {
     try {
-      final notifications = await getNotifications();
+      _initialFuture = getNotifications();
+      final notifications = await _initialFuture!;
       if (firstTime) {
         if (notifications.isEmpty) {
           closeModalBottomSheet(ref);
@@ -61,6 +63,10 @@ class NotificationsStateNotifier
       debugPrint('Error fetching notifications: $e\n$st');
       return;
     }
+  }
+
+  Future<List<NotificationAd>> getFuture() async {
+    return _initialFuture ??= getNotifications();
   }
 
   Set<int> getSawIds() {
