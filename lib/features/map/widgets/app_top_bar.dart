@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:multi_tap_detector/multi_tap_detector.dart';
 import 'package:burrito/services/dio_client.dart';
 import 'package:burrito/data/entities/burrito_status.dart';
 import 'package:burrito/data/entities/last_stop_info.dart';
+import 'package:burrito/features/core/alerts/simple_dialog.dart';
 import 'package:burrito/features/map/widgets/burrito_status_badge.dart';
 import 'package:burrito/features/map/providers/bus_status_provider.dart';
 
@@ -95,29 +98,52 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AnimatedBuilder(
-                        animation: _animation,
-                        builder: (context, child) {
-                          return pickingUp || isOff
-                              ? Container(child: child)
-                              : Transform(
-                                  alignment: Alignment.bottomCenter,
-                                  transform: Matrix4.diagonal3Values(
-                                    1,
-                                    _animation.value,
-                                    1,
-                                  ),
-                                  child: child,
-                                );
+                      MultiTapDetector(
+                        taps: 10,
+                        onMultiTap: () async {
+                          if (kIsWeb) return;
+
+                          final info = await kPackageInfo;
+                          if (!context.mounted) return;
+
+                          await showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (ctx) {
+                              return SimpleAppDialog(
+                                title: 'Contigo Burrito UNMSM 🚍',
+                                content: 'Version: ${info.version}\n'
+                                    'Build number: ${info.buildNumber}',
+                                showAcceptButton: true,
+                              );
+                            },
+                          );
                         },
-                        child: Image.asset(
-                          height: 48,
-                          width: 48,
-                          'assets/icons/real_burrito_icon.png',
+                        child: AnimatedBuilder(
+                          animation: _animation,
+                          builder: (context, child) {
+                            return pickingUp || isOff
+                                ? Container(child: child)
+                                : Transform(
+                                    alignment: Alignment.bottomCenter,
+                                    transform: Matrix4.diagonal3Values(
+                                      1,
+                                      _animation.value,
+                                      1,
+                                    ),
+                                    child: child,
+                                  );
+                          },
+                          child: Image.asset(
+                            height: 48,
+                            width: 48,
+                            'assets/icons/real_burrito_icon.png',
+                          ),
                         ),
                       ),
                       const SizedBox(
-                          height: 2 + BurritoStatusBadge.badgeHeight),
+                        height: 2 + BurritoStatusBadge.badgeHeight,
+                      ),
                     ],
                   ),
                 ],
@@ -193,10 +219,12 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                         ),
                       )
                 : isOff
-                    ? const Text(
+                    ? Text(
                         textAlign: TextAlign.center,
-                        'No hay información disponible',
-                        style: TextStyle(
+                        isWeekend
+                            ? 'El transporte descansa los fines de semana'
+                            : 'No hay información disponible',
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
