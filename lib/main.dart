@@ -40,10 +40,10 @@ void main() async {
     overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
   );
 
-  // SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitDown,
-  //   DeviceOrientation.portraitUp,
-  // ]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
 
   runApp(
     ProviderScope(
