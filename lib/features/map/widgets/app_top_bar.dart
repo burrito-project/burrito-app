@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_tap_detector/multi_tap_detector.dart';
 import 'package:burrito/services/dio_client.dart';
@@ -101,8 +100,6 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                       MultiTapDetector(
                         taps: 10,
                         onMultiTap: () async {
-                          if (kIsWeb) return;
-
                           final info = await kPackageInfo;
                           if (!context.mounted) return;
 
