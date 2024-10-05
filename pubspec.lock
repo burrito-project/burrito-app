@@ -613,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
+  multi_tap_detector:
+    dependency: "direct main"
+    description:
+      name: multi_tap_detector
+      sha256: "42a3c3f1dc06a109892a417b2b4cb65ad80ae6f81b4f9ce48978d334600fbda4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   octo_image:
     dependency: transitive
     description:
