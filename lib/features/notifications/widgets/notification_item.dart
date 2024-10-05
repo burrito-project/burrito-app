@@ -47,19 +47,21 @@ class NotificationItem extends ConsumerWidget {
               ),
               FloatColumn(
                 children: [
-                  Floatable(
-                    float: FCFloat.start,
-                    padding: const EdgeInsets.only(right: 16, top: 8),
-                    child: SizedBox(
-                      width: 75,
-                      child: CachedNetworkImage(
-                        imageUrl: noti.imageUrl!,
-                        height: 75,
+                  if (noti.imageUrl != null) ...[
+                    Floatable(
+                      float: FCFloat.start,
+                      padding: const EdgeInsets.only(right: 16, top: 8),
+                      child: SizedBox(
                         width: 75,
-                        fit: BoxFit.cover,
+                        child: CachedNetworkImage(
+                          imageUrl: noti.imageUrl!,
+                          height: 75,
+                          width: 75,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                   WrappableText(
                     padding: const EdgeInsets.only(top: 4),
                     text: TextSpan(
