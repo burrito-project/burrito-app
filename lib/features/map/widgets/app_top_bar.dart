@@ -1,3 +1,4 @@
+import 'package:burrito/features/map/widgets/buttons/social_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_tap_detector/multi_tap_detector.dart';
@@ -77,8 +78,9 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
         Container(
           height: 90,
           color: Theme.of(context).colorScheme.primary,
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Burrito icon and status badge
               Stack(
@@ -147,7 +149,7 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
               ),
               const SizedBox(width: 15),
               // Next stop and Status text
-              Flexible(
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,6 +183,12 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                     ),
                   ],
                 ),
+              ),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SocialApps(),
+                ],
               ),
             ],
           ),

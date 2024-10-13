@@ -51,9 +51,10 @@ dependencies:
   device_info_plus: ^10.1.2
   crypto: ^3.0.5
   android_id: ^0.4.0
-  url_launcher: ^6.3.0
+  url_launcher: ^6.3.1
   float_column: ^2.1.8
   multi_tap_detector: ^1.0.0
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -112,6 +113,9 @@ flutter:
     - assets/icons/entrance_p7.png
     - assets/icons/entrance_p8.png
     - assets/logos/unmsm_logo.png
+    - assets/icons/social_media/tiktok-icon.svg
+    - assets/icons/social_media/instagram.svg
+    - assets/icons/social_media/facebook.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
