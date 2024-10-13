@@ -78,7 +78,7 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
         Container(
           height: 90,
           color: Theme.of(context).colorScheme.primary,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.only(right: 10, left: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
