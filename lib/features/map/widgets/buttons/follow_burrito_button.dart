@@ -22,7 +22,7 @@ class FollowBurritoMapButton extends ConsumerWidget {
 
     return OverlayMapButton(
       semanticLabel: 'Seguir burrito',
-      buttonActive: followBurrito,
+      colorActive: followBurrito,
       icon: followBurrito ? Icons.stop : Icons.push_pin,
       onTap: () {
         final followBurrito = !ref.read(followBurritoProvider);

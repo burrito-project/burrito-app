@@ -6,12 +6,14 @@ class SimpleAppDialog extends ConsumerWidget {
   final String title;
   final String content;
   final bool showAcceptButton;
+  final VoidCallback? onAccept;
 
   const SimpleAppDialog({
     super.key,
     required this.title,
     required this.content,
     required this.showAcceptButton,
+    this.onAccept,
   });
 
   @override
@@ -94,6 +96,9 @@ class SimpleAppDialog extends ConsumerWidget {
                                   ElevatedButton(
                                     onPressed: () async {
                                       Navigator.of(context).pop();
+                                      if (onAccept != null) {
+                                        onAccept?.call();
+                                      }
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xff0f4d73),

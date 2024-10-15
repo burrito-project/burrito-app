@@ -30,6 +30,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
+    compileSdkVersion 34
     namespace = "com.contigosanmarcos.burritoapp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion

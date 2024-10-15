@@ -1,3 +1,4 @@
+import 'package:burrito/features/map/widgets/buttons/go_user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/features/core/utils.dart';
@@ -49,7 +50,9 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
               Expanded(
                 child: Row(
                   children: [
-                    const Expanded(child: BurritoMap()),
+                    const Expanded(
+                      child: BurritoMap(),
+                    ),
                     if (wideScreen) ...[
                       const WebSidebar(),
                     ]
@@ -63,16 +66,25 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
               ],
             ],
           ),
+          // ↩️ Go back to UNMSM button
           Positioned(
             left: 10,
             bottom: padding + 30,
             child: const GoBackMapButton(),
           ),
+          // 📌 Only shown when the burrito is visible
           Positioned(
             right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
             bottom: padding + 10,
             child: const FollowBurritoMapButton(),
           ),
+          // 🗺️ User location button
+          Positioned(
+            right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
+            bottom: padding + 10,
+            child: const GoUserLocationMapButton(),
+          ),
+          // Bottom bar
           if (!wideScreen) ...[
             const MobileBurritoBottomAppBar(),
           ],

@@ -1,5 +1,5 @@
+import 'package:burrito/features/map/providers/map_restart_key_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:burrito/data/geojson/unmsm.dart';
@@ -23,7 +23,6 @@ class BurritoMap extends ConsumerStatefulWidget {
 
 class BurritoMapState extends ConsumerState<BurritoMap> {
   late GoogleMapController _controller;
-  Position? userPos;
 
   double mapRotation = 0;
   double mapZoom = initialPos.zoom;
@@ -56,6 +55,7 @@ class BurritoMapState extends ConsumerState<BurritoMap> {
   @override
   Widget build(BuildContext context) {
     final burritoState = ref.watch(busStatusProvider);
+    final mapKey = ref.watch(mapKeyProvider);
 
     burritoMarker = burritoState.whenOrNull(
       data: (state) {
@@ -78,6 +78,7 @@ class BurritoMapState extends ConsumerState<BurritoMap> {
     return Listener(
       onPointerDown: (_) => _onTapDown(context),
       child: GoogleMap(
+        key: mapKey,
         mapType: MapType.normal,
         initialCameraPosition: initialPos,
         webGestureHandling: WebGestureHandling.greedy,
@@ -93,7 +94,7 @@ class BurritoMapState extends ConsumerState<BurritoMap> {
         zoomControlsEnabled: false,
         scrollGesturesEnabled: true,
         rotateGesturesEnabled: true,
-        myLocationButtonEnabled: true,
+        myLocationButtonEnabled: false,
         style: mapStyleString,
         polygons: {kUNMSMPolygon, ...kUNMSMPlacesPolygons},
         polylines: {kBurritoPathPolyLine},
