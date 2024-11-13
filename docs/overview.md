@@ -7,5 +7,3 @@ records from the burrito-server by constantly polling for the `/status`
 endpoint.
 
 It is written in Flutter and builds for Android and web platforms.
-
-Refer to the `docs/` for more information.
