@@ -1,4 +1,4 @@
-# Building the APK to upload in an aplication store
+# Building the APK to upload in an Aplication Store
 
 ## 1. Build APKs for Different Architectures
 To build APKs for multiple architectures (e.g., ARM, ARM64, x86), use the following command. This will generate separate APK files for each ABI (Application Binary Interface), allowing users to download the appropriate APK for their device's architecture:
