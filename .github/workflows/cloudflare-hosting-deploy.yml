@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'web/**'
+      - 'lib/**'
+
 jobs:
   build:
     name: Build
