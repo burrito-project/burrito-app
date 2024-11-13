@@ -3,7 +3,7 @@
 The GET `/pending_updates?version=1.0.0` endpoint will return a list of application versions that
 are newer than the one provided in the query parameter.
 
-```jsonc
+```json
 // Example
 {
   "must_update": true,
