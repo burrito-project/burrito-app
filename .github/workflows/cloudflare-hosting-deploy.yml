@@ -36,21 +36,12 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    name: Deploy
     steps:
-      - name: 📚 Git Checkout
-        uses: actions/checkout@v4
-
-      - name: 📦 Download Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: web-build
-          path: build/web
-
-      - name: 🚀 Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - uses: actions/checkout@v4
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'burrito-app'
-          directory: 'build/web'
+          command: pages deploy build/web --project-name=burrito-app
