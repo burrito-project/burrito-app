@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy to Cloudflare
 on:
   push:
     branches:
@@ -6,6 +6,7 @@ on:
     paths:
       - 'web/**'
       - 'lib/**'
+  workflow_dispatch:
 
 jobs:
   build:
