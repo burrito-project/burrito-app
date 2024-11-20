@@ -1,24 +1,23 @@
-# Publishing Your App to the Google Play Store
+# Publicando tu aplicación en Google Play Store
 
-There are some things you want to check before submitting the app to the
-Google Play Store (or any other store).
+Hay algunas cosas que debes verificar antes de enviar la aplicación a Google Play Store (o cualquier otra tienda).
 
-1. Make sure the server is running
+1. Asegúrate de que el servidor esté en funcionamiento
 
-    Before submitting your app to an app store, it's important to verify that the server your app relies on is live, functional, and ready to handle requests. Many app stores require apps to provide real functionality and not just placeholders, so they might review the app's responses to verify it's working as expected.
+    Antes de enviar tu aplicación a una tienda, es importante verificar que el servidor del que depende esté activo, funcional y listo para manejar solicitudes. Muchas tiendas requieren que las aplicaciones proporcionen funcionalidad real y no solo marcadores de posición; por lo tanto, podrían revisar las respuestas de la aplicación para confirmar que funciona como se espera.
 
-    If you don't have a driver sending the data yet, read the Using mocked routes section.
+    Si aún no tienes un controlador enviando los datos, consulta la sección Usando rutas simuladas.
 
-   - Check for Expected Responses: Test that the API is correctly providing the location of the burrito.
-   - Monitor Uptime: Many app stores may periodically check your app's
-    functionality during the review process. Consider using a monitoring service to alert you if your server goes down unexpectedly.
+   - Verifica las respuestas esperadas: Prueba que la API proporcione correctamente la ubicación del burrito.
+   - Monitorea el tiempo de actividad: Muchas tiendas pueden revisar periódicamente la funcionalidad de tu aplicación durante el proceso de revisión. Considera usar un servicio de monitoreo para recibir alertas si tu servidor deja de estar disponible inesperadamente.
 
-2. Make sure the app is using the correct API and not the local host
+2. Asegúrate de que la aplicación esté usando la API correcta y no localhost
 
-    Check the `lib/services/dio_client.dart` file to ensure that the app is connected to the correct API endpoint. The `baseUrl` should be set to your live API URL, not localhost:
+    Revisa el archivo `lib/services/dio_client.dart` para asegurarte de que la aplicación esté conectada al punto final correcto de la API. El `baseUrl` debe estar configurado en la URL de tu API en vivo, no en localhost:
 
     ```json
     baseUrl: 'https://yourAPI.com',
     ```
 
-    Now you are ready to publish the app in the store of your choice.
+    Ahora estás listo para publicar la aplicación en la tienda de tu elección.
+
