@@ -1,10 +1,9 @@
-# App updating protocol
+# Protocolo de actualización de la aplicación
 
-The GET `/pending_updates?version=1.0.0` endpoint will return a list of application versions that
-are newer than the one provided in the query parameter.
+El endpoint GET `/pending_updates?version=1.0.0` devolverá una lista de versiones de la aplicación que son más recientes que la proporcionada en el parámetro de consulta.
 
 ```json
-// Example
+// Ejemplo
 {
   "must_update": true,
   "versions": [
@@ -12,53 +11,52 @@ are newer than the one provided in the query parameter.
       "banner_url": "https://picsum.photos/id/866/400",
       "is_mandatory": false,
       "release_date": "2019-10-12T07:20:50.52Z",
-      "release_notes": "This is a LONG summary of the changes that are introduced in the new version that can even include breaklines.\n\n- Feature 1\n- Feature 2",
+      "release_notes": "Este es un resumen extenso de los cambios introducidos en la nueva versión, que puede incluir saltos de línea.\n\n- Característica 1\n- Característica 2",
       "semver": "1.1.0"
     }
   ]
 }
 ```
+El cliente NO DEBE permitir que el usuario continúe con la aplicación si alguna versión está marcada como is_mandatory. Si el cliente lo decide, puede mostrar un diálogo al usuario con el registro de cambios y la opción de actualizar, almacenando el reconocimiento en el almacenamiento local.
 
-The client MUST NOT let the user proceed with the application if some version is marked as
-`is_mandatory`. If the client decides to, it can show a dialog to the user with the changelog and
-the option to update, storing the acknowledgement in the local storage.
+Un ejemplo del flujo de trabajo sería:
 
-An example of the workflow would be:
+~~~
+Acto 1: la primera vez
 
-```txt
-Act 1: the first time
+>el cliente solicita /pending_updates?version=1.0.0
+>el servidor devuelve dos versiones pendientes, ninguna obligatoria
+>se muestran dos opciones [Actualizar ahora] y [Más tarde] al usuario junto con los registros de cambios
+>el usuario reconoce
+>el cliente almacena la más alta como "latest_acknowledged_version" en el almacenamiento local
+>el usuario decide no actualizar
 
->client fetches /pending_updates?version=1.0.0
->server returns two pending version, where neither is mandatory
->two options, [Update now] and [Later] are shown to the user along with the changelogs
->user acknowledges
->client stores the highest one as "latest_acknowledged_version" in local storage
->user decides not to update
+Acto 2: al día siguiente, otra actualización
 
-Act 2: next day, next update
+>el cliente solicita /pending_updates?version=1.0.0
+>el servidor devuelve tres versiones, aún ninguna obligatoria
+>como una de ellas es más reciente que "latest_acknowledged_version", el cliente muestra el diálogo
+>el usuario reconoce
+>el cliente almacena la más alta como "latest_acknowledged_version" en el almacenamiento local
+>el usuario decide no actualizar
 
->client fetches /pending_updates?version=1.0.0
->now server returns three versions, still none mandatory
->since one of them is newer than "latest_acknowledged_version", client shows the dialog
->user acknowledges
->client stores the highest one as "latest_acknowledged_version" in local storage
->user decides not to update
+Acto 3: la actualización urgente
 
-Act 3: the urgent update
+>el cliente solicita /pending_updates?version=1.0.0
+>el servidor devuelve cuatro versiones, donde la última (2.0.0) es obligatoria
+>el cliente combina los registros de cambios y los muestra al usuario junto con el botón [Actualizar ahora]
+>el usuario reconoce y la única opción es actualizar
+>el cliente almacena la más alta como "latest_acknowledged_version" en el almacenamiento local
+>el usuario actualiza
 
->the client fetches /pending_updates?version=1.0.0
->now server returns four versions, where the last one (2.0.0) is mandatory
->client merges the changelogs and shows them to the user along with the [Update now] button
->user acknowledges and it only option is to update
->client stores the highest one as "latest_acknowledged_version" in local storage
->user updates
+Acto 4: la calma después de la tormenta
 
-Act 4: the calm after the storm
+>el cliente solicita /pending_updates?version=2.0.0
+>el servidor devuelve una lista vacía
+>el cliente continúa con la aplicación
+~~~
+El ejemplo anterior describe nuestra implementación actual.
+Podríamos cambiarla en el futuro, pero la idea general seguirá siendo la misma.
 
->client fetches /pending_updates?version=2.0.0
->server returns an empty list
->client proceeds with the app
-```
 
-The above example describes our current implementation.
-We might change it in the future, but the general idea will remain the same.
+
