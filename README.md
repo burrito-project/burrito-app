@@ -2,10 +2,10 @@
 
 Status: production ready
 
-The app that students use to check the bus status. It consumes the status
-records from the burrito-server by constantly polling for the `/status`
-endpoint.
+La aplicación que los estudiantes usan para verificar el estado del autobús. 
+Consume los registros de estado desde el burrito-server realizando 
+consultas constantes al endpoint `/status`.
 
-It is written in Flutter and builds for Android and web platforms.
+Está escrita en Flutter y se compila para las plataformas Android y web.
 
-Refer to the `docs/` for more information.
+Consulta el directorio `docs/` para más información.
