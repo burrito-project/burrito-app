@@ -20,4 +20,3 @@ Hay algunas cosas que debes verificar antes de enviar la aplicación a Google Pl
     ```
 
     Ahora estás listo para publicar la aplicación en la tienda de tu elección.
-

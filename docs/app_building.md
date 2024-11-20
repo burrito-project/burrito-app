@@ -1,21 +1,21 @@
 <!-- markdownlint-disable MD033 MD042 -->
 
-# Construyendo el cliente móvil
+# Compliando el cliente móvil
 
 Para obtener información más detallada, consulte
 [Los documentos oficiales de flutter](https://docs.flutter.dev/deployment/android#build-the-app-for-release).
 
 <div class="warning">
-Tenga en cuenta que esta documentación es solo para Android. 
+Tenga en cuenta que esta documentación es solo para Android.
 Aunque Flutter es compatible con iOS, aún no lo hemos probado para este proyecto.
 
-Hay un flujo de trabajo funcional llamado ios-compilation.yml en el directorio
-.github/workflows que puedes consultar.
+Hay un action llamado "ios-compilation.yml" en el directorio
+.github/workflows que puedes consultar para más información.
 </div>
 
-## Construyendo el APK
+## Compliando el APK
 
-Para crear APK para múltiples arquitecturas (p. ej., ARM, ARM64, x86), utilice el siguiente comando. Esto generará archivos APK separados para cada ABI (interfaz binaria de aplicación), lo que permitirá a los usuarios descargar el APK apropiado para la arquitectura de su dispositivo:
+Para crear APK para múltiples arquitecturas (ej., ARM, ARM64, x86), utilice el siguiente comando. Esto generará archivos APK separados para cada ABI (interfaz binaria de aplicación), lo que permitirá a los usuarios descargar el APK apropiado para la arquitectura de su dispositivo:
 
 ```json
 flutter build apk --split-per-abi
