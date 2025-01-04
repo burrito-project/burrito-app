@@ -1,6 +1,6 @@
 # Burrito App
 
-Estado: listo para producción
+Estado: lista para producción
 
 La aplicación que los estudiantes usan para verificar el estado del bus. Consume los registros de estado desde el burrito-server realizando consultas constantes al endpoint `/status`.
 
