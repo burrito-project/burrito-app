@@ -1,17 +1,19 @@
-# Desplegando la aplicación en la web usando Cloudflare Pages
+# Deploying the app in the web using Cloudflare Pages
 
-El despliegue en Cloudflare Pages ya está configurado como un flujo de trabajo de GitHub que se activa con cada *push* a la rama `main`.
+Cloudflare Pages deployment is already configured as a GitHub workflow that
+is triggered on every push to the `main` branch.
 
-Para más detalles, consulta el archivo `.github/workflows/deploy.yml`.
+For details see the `.github/workflows/deploy.yml` file.
 
-## Usando un dominio personalizado
+## Using a custom domain
 
-Por defecto, las páginas de Cloudflare se despliegan en el dominio `*.pages.dev`.  
-Para usar un dominio personalizado, sigue las instrucciones proporcionadas por Cloudflare en el panel de Pages.
+By default, Cloudflare Pages are deployed to the `*.pages.dev` domain.
+To use a custom domain, follow the instructions provided by Cloudflare
+in the Pages dashboard.
 
-## Construyendo manualmente la aplicación web
+## Manually building the Web App
 
-Construye la aplicación para web con:
+Build the app for web with:
 
 ```console
 flutter build web -t lib/main.dart
