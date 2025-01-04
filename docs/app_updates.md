@@ -17,7 +17,7 @@ El endpoint GET `/pending_updates?version=1.0.0` devolverá una lista de version
   ]
 }
 ```
-El cliente NO DEBE permitir que el usuario continúe con la aplicación si alguna versión está marcada como `is_mandatory`. Si el cliente lo decide, puede mostrar un diálogo al usuario con el registro de cambios y la opción de actualizar, almacenando el reconocimiento en el almacenamiento local.
+El cliente NO DEBE permitir que el usuario continúe con la aplicación si alguna versión está marcada como is_mandatory. Si el cliente lo decide, puede mostrar un diálogo al usuario con el registro de cambios y la opción de actualizar, almacenando el reconocimiento en el almacenamiento local.
 
 Un ejemplo del flujo de trabajo sería:
 
