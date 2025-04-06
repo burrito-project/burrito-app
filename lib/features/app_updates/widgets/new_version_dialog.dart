@@ -244,7 +244,7 @@ class NewVersionDialog extends ConsumerWidget {
   Future<void> openPlayStore() async {
     if (Platform.isAndroid || Platform.isIOS) {
       final appId = Platform.isAndroid
-          ? 'com.contigosanmarcos.burritoapp'
+          ? 'com.unmsm.burritoapp'
           : 'io.github.proyectitos-fisi.burrito';
       final url = Uri.parse(
         Platform.isAndroid

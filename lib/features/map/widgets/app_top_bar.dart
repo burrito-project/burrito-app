@@ -110,7 +110,7 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                             barrierDismissible: false,
                             builder: (ctx) {
                               return SimpleAppDialog(
-                                title: 'Contigo Burrito UNMSM 🚍',
+                                title: 'Burrito UNMSM 🚍',
                                 content: 'Version: ${info.version}\n'
                                     'Build number: ${info.buildNumber}',
                                 showAcceptButton: true,
@@ -184,12 +184,12 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                   ],
                 ),
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SocialApps(),
-                ],
-              ),
+              // const Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: [
+              //     SocialApps(),
+              //   ],
+              // ),
             ],
           ),
         ),

@@ -164,7 +164,7 @@ class VersionInfo extends StatelessWidget {
             ),
             const SizedBox(width: 5),
             Text(
-              'Contigo Burrito',
+              'Burrito UNMSM',
               style: TextStyle(
                 color: Theme.of(context).hintColor,
                 fontSize: 14,

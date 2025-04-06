@@ -49,7 +49,7 @@ void main() async {
   runApp(
     ProviderScope(
       child: MaterialApp(
-        title: 'Contigo Burrito UNMSM',
+        title: 'Burrito UNMSM',
         theme: BurritoMobileTheme.theme,
         debugShowCheckedModeBanner: false,
         home: const SafeArea(

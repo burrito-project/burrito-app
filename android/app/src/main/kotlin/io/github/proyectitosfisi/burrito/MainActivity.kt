@@ -1,4 +1,4 @@
-package com.contigosanmarcos.burritoapp
+package com.unmsm.burritoapp
 
 import io.flutter.embedding.android.FlutterActivity
 
