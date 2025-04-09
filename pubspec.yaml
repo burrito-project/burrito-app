@@ -104,19 +104,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/icons/real_burrito_icon.png
-    - assets/icons/burrito_marker.png
-    # - assets/icons/user_position_marker.png
-    - assets/icons/busstop_marker.png
-    - assets/icons/entrance_p1.png
-    - assets/icons/entrance_p2.png
-    - assets/icons/entrance_p3.png
-    - assets/icons/entrance_p4.png
-    - assets/icons/entrance_p5.png
-    - assets/icons/entrance_p6.png
-    - assets/icons/entrance_p7.png
-    - assets/icons/entrance_p8.png
-    - assets/logos/unmsm_logo.png
+    - assets/icons/
     - assets/icons/social_media/tiktok-icon.svg
     - assets/icons/social_media/instagram.svg
     - assets/icons/social_media/facebook.svg

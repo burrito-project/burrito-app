@@ -78,9 +78,10 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
         Container(
           height: 90,
           color: Theme.of(context).colorScheme.primary,
-          padding: const EdgeInsets.only(right: 10, left: 16),
+          padding: const EdgeInsets.only(right: 10, left: 16, bottom: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Burrito icon and status badge
               Stack(
@@ -136,7 +137,7 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
                           child: Image.asset(
                             height: 48,
                             width: 48,
-                            'assets/icons/real_burrito_icon.png',
+                            'assets/icons/burrito_ghibili.png',
                           ),
                         ),
                       ),
@@ -149,41 +150,81 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
               ),
               const SizedBox(width: 15),
               // Next stop and Status text
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (hasLastStop) ...[
-                      Text(
-                        pickingUp
-                            ? 'Recogiendo pasajeros...'
-                            : 'Próxima estación (${widget.burritoState!.lastStop!.distanceMeters})',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: pickingUp
-                              ? const Color.fromARGB(255, 97, 221, 101)
-                              : Colors.white,
-                        ),
-                      ),
-                    ],
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (true) ...[
                     Text(
-                      isWeekend || isOff
-                          ? 'Fuera de servicio'
-                          : hasLastStop
-                              ? widget.burritoState!.lastStop!.name
-                              : 'Iniciando ruta...',
-                      softWrap: false,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 26,
-                        color: Colors.white,
+                      true
+                          ? 'Recogiendo pasajeros...'
+                          : 'Próxima estación (${widget.burritoState!.lastStop!.distanceMeters})',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: true
+                            ? const Color.fromARGB(255, 97, 221, 101)
+                            : Colors.white,
                       ),
                     ),
                   ],
-                ),
+                  Text(
+                    isWeekend || isOff
+                        ? 'Fuera de servicio'
+                        : hasLastStop
+                            ? widget.burritoState!.lastStop!.name
+                            : 'Iniciando ruta...',
+                    softWrap: false,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontSize: 26,
+                      color: Colors.white,
+                    ),
+                  ),
+                  hasLastStop
+                      ? pickingUp
+                          ? const Text(
+                              textAlign: TextAlign.center,
+                              'Puede avanzar en cualquier momento',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          : const Text(
+                              textAlign: TextAlign.center,
+                              'En camino...',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                      : isOff
+                          ? Text(
+                              textAlign: TextAlign.center,
+                              isWeekend
+                                  ? 'El transporte descansa los fines de semana'
+                                  : 'No hay información disponible',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          : const Text(
+                              textAlign: TextAlign.center,
+                              'Se mostrará información apenas esté disponible',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                ],
               ),
+
               // const Row(
               //   mainAxisAlignment: MainAxisAlignment.end,
               //   children: [
@@ -193,59 +234,6 @@ class BurritoTopAppBarRenderState extends State<BurritoTopAppBarRender>
             ],
           ),
         ),
-        AnimatedContainer(
-          width: double.infinity,
-          height: 24,
-          duration: const Duration(milliseconds: 500),
-          color: hasLastStop
-              ? pickingUp
-                  ? const Color(0xFF3E8841)
-                  : Colors.red
-              : const Color(0xFF3A3A3A),
-          child: Center(
-            child: hasLastStop
-                ? pickingUp
-                    ? const Text(
-                        textAlign: TextAlign.center,
-                        'Puede avanzar en cualquier momento',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                    : const Text(
-                        textAlign: TextAlign.center,
-                        'En camino...',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                : isOff
-                    ? Text(
-                        textAlign: TextAlign.center,
-                        isWeekend
-                            ? 'El transporte descansa los fines de semana'
-                            : 'No hay información disponible',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                    : const Text(
-                        textAlign: TextAlign.center,
-                        'Se mostrará información apenas esté disponible',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-          ),
-        )
       ],
     );
   }

@@ -15,23 +15,23 @@ class FollowBurritoMapButton extends ConsumerWidget {
     final mapController = ref.watch(mapControllerProvider);
     final followBurrito = ref.watch(followBurritoProvider);
 
-    if (!burritoState.hasValue ||
-        (burritoState.hasValue && !burritoState.value!.isBurritoVisible)) {
-      return const SizedBox.shrink();
-    }
+    // if (!burritoState.hasValue ||
+    //     (burritoState.hasValue && !burritoState.value!.isBurritoVisible)) {
+    //   return const SizedBox.shrink();
+    // }
 
     return OverlayMapButton(
       semanticLabel: 'Seguir burrito',
       colorActive: followBurrito,
-      icon: followBurrito ? Icons.stop : Icons.push_pin,
+      icon: true ? Icons.stop : Icons.push_pin,
       onTap: () {
         final followBurrito = !ref.read(followBurritoProvider);
         ref.read(followBurritoProvider.notifier).state = followBurrito;
 
-        if (followBurrito) {
+        if (true) {
           final state = burritoState.valueOrNull!;
 
-          if (state.isBurritoVisible) {
+          if (true) {
             mapController?.animateCamera(
               CameraUpdate.newLatLngZoom(
                 LatLng(

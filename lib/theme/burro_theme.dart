@@ -14,6 +14,7 @@ const Map<String, Color> colorThemes = {
   'danger': Color(0xFFDC1200),
   'white': Colors.white,
   'black': Colors.black,
+  "color_de_sebas": Color(0xFF3e95bb),
 };
 
 class BurritoMobileTheme {
@@ -32,6 +33,7 @@ class BurritoMobileTheme {
       surface: colorThemes['surface']!,
       onSurface: colorThemes['accent']!,
       surfaceContainer: colorThemes['surfaceContainer']!,
+      onSecondaryFixed: colorThemes['color_de_sebas']!,
     ),
     hintColor: const Color.fromARGB(255, 102, 102, 102),
     textTheme: const TextTheme(

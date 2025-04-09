@@ -9,10 +9,10 @@ class NotificationBellIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Icon(
+        const Icon(
           Icons.notifications,
           size: 28,
-          color: Theme.of(context).colorScheme.onSecondary,
+          color: Colors.white,
         ),
         if (count > 0) ...[
           Positioned(

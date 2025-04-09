@@ -1,9 +1,9 @@
+import 'package:burrito/features/map/widgets/bottom_bar/bottom_bar_footer_content.dart';
 import 'package:burrito/features/map/widgets/buttons/go_user_location.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:burrito/features/core/utils.dart';
 import 'package:burrito/features/map/widgets/map_view.dart';
-import 'package:burrito/features/map/widgets/app_top_bar.dart';
 import 'package:burrito/features/notifications/widgets/web_sidebar.dart';
 import 'package:burrito/features/core/providers/responsive_provider.dart';
 import 'package:burrito/features/map/widgets/buttons/go_back_button.dart';
@@ -46,7 +46,10 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
         children: [
           Column(
             children: [
-              const BurritoTopAppBar(),
+              const SizedBox(
+                height: 60,
+                child: BottomBarFooterContent(),
+              ),
               Expanded(
                 child: Row(
                   children: [
@@ -66,23 +69,26 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
               ],
             ],
           ),
+          Positioned(
+            right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
+            top: 80,
+            child: const Column(
+              children: [
+                // 🗺️ User location button
+                GoUserLocationMapButton(),
+                SizedBox(
+                  height: 20,
+                ),
+                // 📌 Only shown when the burrito is visible
+                FollowBurritoMapButton(),
+              ],
+            ),
+          ),
           // ↩️ Go back to UNMSM button
           Positioned(
-            left: 10,
-            bottom: padding + 30,
+            right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
+            bottom: padding + 10,
             child: const GoBackMapButton(),
-          ),
-          // 📌 Only shown when the burrito is visible
-          Positioned(
-            right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
-            bottom: padding + 10,
-            child: const FollowBurritoMapButton(),
-          ),
-          // 🗺️ User location button
-          Positioned(
-            right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
-            bottom: padding + 10,
-            child: const GoUserLocationMapButton(),
           ),
           // Bottom bar
           if (!wideScreen) ...[

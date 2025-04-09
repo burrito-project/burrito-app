@@ -23,7 +23,7 @@ class BottomBarFooterContentState
 
     return Container(
       padding: const EdgeInsets.only(right: 0, left: 8),
-      color: Theme.of(context).colorScheme.primary,
+      color: Theme.of(context).colorScheme.onSecondaryFixed,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
