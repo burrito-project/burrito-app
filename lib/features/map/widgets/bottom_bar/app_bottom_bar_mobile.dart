@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:burrito/features/map/widgets/app_top_bar.dart';
+import 'package:burrito/features/map/widgets/bottom_bar/bottom_bar_footer_content.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:burrito/services/dio_client.dart';
@@ -22,7 +22,7 @@ class MobileBurritoBottomAppBar extends ConsumerStatefulWidget {
 
 class MobileBurritoBottomAppBarState
     extends ConsumerState<MobileBurritoBottomAppBar> {
-  static const bottomBarHeight = 140.0;
+  static const bottomBarHeight = 70.0;
   static double minFraction = 0.06;
   static double maxFraction = 0.4;
 
@@ -84,8 +84,10 @@ class MobileBurritoBottomAppBarState
                       child: Column(
                         children: [
                           _draggableTip(),
-                          const SizedBox(height: 10),
-                          const BurritoTopAppBar(),
+                          const SizedBox(
+                            height: 40,
+                            child: BottomBarFooterContent(),
+                          ),
                           const SizedBox(height: 10),
                           const AdvertisementsCarousel(),
                           if (hasUpdates) ...[

@@ -15,7 +15,7 @@ Stream<T> periodic<T>(Duration period, T Function(int) cb) async* {
 }
 
 final busStatusProvider = StreamProvider<BurritoState>((ref) async* {
-  final stream = periodic(const Duration(seconds: 1), (i) => i)
+  final stream = periodic(const Duration(seconds: 1000), (i) => i)
       .asyncMap<BurritoState?>((_) async {
     try {
       final response = await getInfoAcrossTime();

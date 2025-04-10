@@ -37,7 +37,7 @@ class NotificationsButtonState extends ConsumerState<NotificationsButton> {
         child: Padding(
           padding: const EdgeInsets.only(right: 6, left: 12),
           child: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.onSecondaryFixed,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
             child: NotificationBellIcon(count: unseen),
           ),
         ),
