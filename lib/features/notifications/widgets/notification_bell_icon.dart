@@ -12,7 +12,7 @@ class NotificationBellIcon extends StatelessWidget {
         const Icon(
           Icons.notifications,
           size: 28,
-          color: Colors.white,
+          color: Colors.black,
         ),
         if (count > 0) ...[
           Positioned(

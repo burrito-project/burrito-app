@@ -23,7 +23,7 @@ class BottomBarFooterContentState
 
     return Container(
       padding: const EdgeInsets.only(right: 0, left: 8),
-      color: Theme.of(context).colorScheme.primary,
+      color: const Color(0xffffffff),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +33,7 @@ class BottomBarFooterContentState
               children: [
                 const Icon(
                   Icons.speed_outlined,
-                  color: Colors.white,
+                  color: Colors.black,
                   size: 18,
                 ),
                 const SizedBox(width: 5),
@@ -44,7 +44,7 @@ class BottomBarFooterContentState
                     loading: () => 0.0.kmphString,
                   ),
                   style: const TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 15,
                   ),
                 ),
@@ -62,7 +62,7 @@ class BottomBarFooterContentState
                     const Text(
                       'Actualizado hace',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.w200,
                         fontSize: 14,
                       ),
@@ -75,7 +75,7 @@ class BottomBarFooterContentState
                         loading: () => '?',
                       ),
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
                       ),

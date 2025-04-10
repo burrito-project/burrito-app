@@ -60,14 +60,14 @@ class NotificationsEmpty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).colorScheme.secondary,
+      color: const Color(0xffedf2f6),
       child: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             '¡Estás al día!',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
               fontSize: 16,
             ),
           ),
@@ -75,8 +75,8 @@ class NotificationsEmpty extends StatelessWidget {
           Text(
             'Aquí aparecerán futuras notificaciones',
             style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w200,
+              color: Colors.black,
+              fontWeight: FontWeight.w300,
               fontSize: 14,
             ),
           ),

@@ -22,7 +22,7 @@ class MobileBurritoBottomAppBar extends ConsumerStatefulWidget {
 
 class MobileBurritoBottomAppBarState
     extends ConsumerState<MobileBurritoBottomAppBar> {
-  static const bottomBarHeight = 70.0;
+  static const bottomBarHeight = 80.0;
   static double minFraction = 0.06;
   static double maxFraction = 0.4;
 
@@ -68,9 +68,9 @@ class MobileBurritoBottomAppBarState
             controller: bottomSheetController,
             builder: (ctx, scrollController) {
               return Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primary,
-                  borderRadius: const BorderRadius.only(
+                decoration: const BoxDecoration(
+                  color: Color(0xffffffff),
+                  borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                   ),
