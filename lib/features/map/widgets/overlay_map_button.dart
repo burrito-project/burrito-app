@@ -15,8 +15,8 @@ class OverlayMapButton extends StatelessWidget {
     required this.icon,
     required this.semanticLabel,
     required this.onTap,
-    this.size = 52,
-    this.iconSize = 32,
+    this.size = 36,
+    this.iconSize = 26,
     this.accentColor,
   });
 
@@ -26,28 +26,24 @@ class OverlayMapButton extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: accentColor, width: 1.5),
+        border: Border.all(color: accentColor, width: 0.5),
+        color: colorActive ? accentColor : Colors.white,
+        borderRadius: BorderRadius.circular(8.0),
       ),
-      child: ClipOval(
-        child: Material(
-          color: colorActive ? accentColor : Colors.white,
-          child: Semantics(
-            label: semanticLabel,
-            button: true,
-            enabled: true,
-            child: InkWell(
-              onTap: onTap?.call,
-              splashColor: Colors.grey,
-              child: SizedBox(
-                width: size,
-                height: size,
-                child: Icon(
-                  icon,
-                  size: iconSize,
-                  color: colorActive ? Colors.white : accentColor,
-                ),
-              ),
+      child: Semantics(
+        label: semanticLabel,
+        button: true,
+        enabled: true,
+        child: InkWell(
+          onTap: onTap?.call,
+          splashColor: Colors.grey,
+          child: SizedBox(
+            width: size,
+            height: size,
+            child: Icon(
+              icon,
+              size: iconSize,
+              color: colorActive ? Colors.white : accentColor,
             ),
           ),
         ),

@@ -70,23 +70,25 @@ class BurritoAppState extends ConsumerState<BurritoApp> {
               ],
             ],
           ),
-          // ↩️ Go back to UNMSM button
-          Positioned(
-            left: 10,
-            bottom: padding + 30,
-            child: const GoBackMapButton(),
-          ),
-          // 📌 Only shown when the burrito is visible
           Positioned(
             right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
             bottom: padding + 10,
-            child: const FollowBurritoMapButton(),
-          ),
-          // 🗺️ User location button
-          Positioned(
-            right: (wideScreen ? WebSidebar.maxWidth : 0) + 10,
-            bottom: padding + 10,
-            child: const GoUserLocationMapButton(),
+            child: const Column(
+              children: [
+                // ↩️ Go back to UNMSM button
+                GoBackMapButton(),
+                SizedBox(
+                  height: 5,
+                ),
+                // 📌 Only shown when the burrito is visible
+                FollowBurritoMapButton(),
+                SizedBox(
+                  height: 5,
+                ),
+                // 🗺️ User location button
+                GoUserLocationMapButton(),
+              ],
+            ),
           ),
           // Bottom bar
           if (!wideScreen) ...[
