@@ -27,14 +27,14 @@ class WebSidebarState extends ConsumerState<ConsumerStatefulWidget> {
     return Container(
       alignment: Alignment.topCenter,
       width: WebSidebar.maxWidth,
-      color: Colors.black,
+      color: const Color(0xff470302),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(12).copyWith(left: 16),
             child: const Text(
-              'Notificationes',
+              'Notificaciones',
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 18,

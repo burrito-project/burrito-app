@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
 
-const onItsWayText = 'En camino';
-const pickingUpText = 'Recogiendo';
+const ongoingText = 'En camino...';
+const pickingUpText = 'Recogiendo pasajeros...';
 const noInformationText = 'No disponible';
-const noInformationWeekendText = 'Descanso';
-const waitingForText = 'Esperando';
+const noInformationWeekendText = 'Descanso por fin de semana';
+const waitingForText = 'Iniciando ruta...';
 
 const stylesMap = {
-  onItsWayText: {
-    'bg': Color(0xFF3A3A3A),
-    'border': Color(0xFF3E8841),
-    'text': Colors.white,
+  ongoingText: {
+    'bg': Color.fromARGB(255, 193, 64, 64),
+    'border': Color.fromARGB(255, 117, 32, 32),
+    'text': Color.fromARGB(255, 247, 222, 222),
   },
   pickingUpText: {
     'bg': Color.fromARGB(255, 132, 190, 125),
-    'border': Color.fromARGB(255, 42, 83, 44),
-    'text': Color.fromARGB(255, 47, 91, 48),
+    'border': Color.fromARGB(255, 27, 59, 28),
+    'text': Color.fromARGB(255, 27, 59, 28),
   },
   noInformationText: {
-    'bg': Color(0xFF3A3A3A),
-    'border': Color(0xFF3A3A3A),
+    'bg': Color.fromARGB(255, 78, 78, 78),
+    'border': Color.fromARGB(255, 52, 52, 52),
     'text': Colors.white,
   },
   noInformationWeekendText: {
-    'bg': Color(0xFF3A3A3A),
-    'border': Color(0xFF3A3A3A),
+    'bg': Color.fromARGB(255, 78, 78, 78),
+    'border': Color.fromARGB(255, 52, 52, 52),
     'text': Colors.white,
   },
   waitingForText: {
-    'bg': Color(0xfffeeba5),
-    'border': Color(0xffd39647),
-    'text': Colors.white,
+    'bg': Color.fromARGB(255, 252, 205, 104),
+    'border': Color.fromARGB(255, 100, 68, 26),
+    'text': Color.fromARGB(255, 100, 68, 26),
   },
 };
 
@@ -58,7 +58,7 @@ class ColoredInformationBar extends StatelessWidget {
       if (pickingUp) {
         statusText = pickingUpText;
       } else {
-        statusText = onItsWayText;
+        statusText = ongoingText;
       }
     } else {
       if (isOff) {
@@ -71,14 +71,12 @@ class ColoredInformationBar extends StatelessWidget {
     final statusStyle = stylesMap[statusText]!;
 
     return AnimatedContainer(
-      // width: double.infinity,
       duration: const Duration(milliseconds: 500),
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 2),
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(3)),
-        border: Border.all(
-          color: statusStyle['border']!,
-          width: 1.2,
+        border: Border(
+          top: BorderSide(color: statusStyle['border']!, width: 0.8),
+          bottom: BorderSide(color: statusStyle['border']!, width: 0.8),
         ),
         color: statusStyle['bg'],
       ),
@@ -87,9 +85,9 @@ class ColoredInformationBar extends StatelessWidget {
           textAlign: TextAlign.center,
           statusText,
           style: TextStyle(
-            color: statusStyle['border'],
+            color: statusStyle['text'],
             fontSize: 13,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ),

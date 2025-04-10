@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 const Map<String, Color> colorThemes = {
+  'primary': Color(0xfff8fafb),
   'backgroundBlack': Color(0xFF171920),
   'surface': Color.fromARGB(255, 255, 255, 255),
   'surfaceContainer': Color.fromARGB(255, 39, 41, 43),
   'accent': Color(0xFF74777C),
-  'primary': Color.fromARGB(255, 11, 11, 11),
   'secondary': Color.fromARGB(255, 24, 24, 24),
   'onSecondary': Color.fromARGB(255, 155, 155, 155),
   'tertiary': Color(0xFFC3D1E4),
@@ -14,17 +14,16 @@ const Map<String, Color> colorThemes = {
   'danger': Color(0xFFDC1200),
   'white': Colors.white,
   'black': Colors.black,
-  "color_de_sebas": Color(0xFF3e95bb),
 };
 
 class BurritoMobileTheme {
   static ThemeData theme = ThemeData(
-    brightness: Brightness.dark,
+    brightness: Brightness.light,
     useMaterial3: true,
     colorScheme: ColorScheme(
-      brightness: Brightness.dark,
+      brightness: Brightness.light,
       primary: colorThemes['primary']!,
-      onPrimary: colorThemes['white']!,
+      onPrimary: colorThemes['black']!,
       secondary: colorThemes['secondary']!,
       onSecondary: colorThemes['onSecondary']!,
       tertiary: colorThemes['tertiary']!,
@@ -33,7 +32,6 @@ class BurritoMobileTheme {
       surface: colorThemes['surface']!,
       onSurface: colorThemes['accent']!,
       surfaceContainer: colorThemes['surfaceContainer']!,
-      onSecondaryFixed: colorThemes['color_de_sebas']!,
     ),
     hintColor: const Color.fromARGB(255, 102, 102, 102),
     textTheme: const TextTheme(

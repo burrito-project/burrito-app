@@ -11,8 +11,8 @@ class NotificationBellIcon extends StatelessWidget {
       children: [
         const Icon(
           Icons.notifications,
-          size: 28,
-          color: Colors.black,
+          size: 20,
+          color: Color(0xffe2d4d4),
         ),
         if (count > 0) ...[
           Positioned(

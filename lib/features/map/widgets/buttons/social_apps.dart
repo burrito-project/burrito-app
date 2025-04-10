@@ -13,7 +13,7 @@ class SocialApps extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Future<void> _launchUrl(Uri url) async {
+    Future<void> internalLaunchUrl(Uri url) async {
       if (!await launchUrl(url)) {
         throw Exception('Could not launch $url');
       }
@@ -28,7 +28,7 @@ class SocialApps extends ConsumerWidget {
           height: 18,
           child: ElevatedButton(
             onPressed: () {
-              _launchUrl(facebookUrl);
+              internalLaunchUrl(facebookUrl);
             },
             style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
             child: Row(
@@ -51,7 +51,7 @@ class SocialApps extends ConsumerWidget {
           height: 18,
           child: ElevatedButton(
             onPressed: () {
-              _launchUrl(instagramUrl);
+              internalLaunchUrl(instagramUrl);
             },
             style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
             child: Row(
@@ -74,7 +74,7 @@ class SocialApps extends ConsumerWidget {
           height: 18,
           child: ElevatedButton(
             onPressed: () {
-              _launchUrl(tiktokUrl);
+              internalLaunchUrl(tiktokUrl);
             },
             style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
             child: Row(

@@ -22,11 +22,9 @@ class MobileBurritoBottomAppBar extends ConsumerStatefulWidget {
 
 class MobileBurritoBottomAppBarState
     extends ConsumerState<MobileBurritoBottomAppBar> {
-  static const bottomBarHeight = 80.0;
+  static const bottomBarHeight = 45;
   static double minFraction = 0.06;
   static double maxFraction = 0.4;
-
-  bool bottomSheetIsExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +57,7 @@ class MobileBurritoBottomAppBarState
           },
           // PointerDeviceKind.mouse
           child: DraggableScrollableSheet(
-            initialChildSize: maxFraction,
+            initialChildSize: minFraction,
             minChildSize: minFraction,
             maxChildSize: maxFraction,
             snapAnimationDuration: Durations.short4,
@@ -83,12 +81,12 @@ class MobileBurritoBottomAppBarState
                       fillOverscroll: false,
                       child: Column(
                         children: [
-                          _draggableTip(),
+                          // _draggableTip(),
                           const SizedBox(
                             height: 40,
                             child: BottomBarFooterContent(),
                           ),
-                          const SizedBox(height: 10),
+                          // const SizedBox(height: 10),
                           const AdvertisementsCarousel(),
                           if (hasUpdates) ...[
                             ...pendingUpdates.when(
@@ -125,7 +123,7 @@ class MobileBurritoBottomAppBarState
     });
   }
 
-  Widget _draggableTip() => Center(
+  Widget draggableTip() => Center(
         child: Container(
           height: 4,
           width: 40,

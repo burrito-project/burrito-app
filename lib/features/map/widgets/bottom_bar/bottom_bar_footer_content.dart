@@ -7,7 +7,12 @@ import 'package:burrito/features/map/providers/bottomsheet_provider.dart';
 import 'package:burrito/features/notifications/widgets/notifications_button.dart';
 
 class BottomBarFooterContent extends ConsumerStatefulWidget {
-  const BottomBarFooterContent({super.key});
+  final bool withNotifications;
+
+  const BottomBarFooterContent({
+    super.key,
+    this.withNotifications = false,
+  });
 
   @override
   ConsumerState<BottomBarFooterContent> createState() =>
@@ -23,7 +28,7 @@ class BottomBarFooterContentState
 
     return Container(
       padding: const EdgeInsets.only(right: 0, left: 8),
-      color: const Color(0xffffffff),
+      color: const Color(0xff470302),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +38,7 @@ class BottomBarFooterContentState
               children: [
                 const Icon(
                   Icons.speed_outlined,
-                  color: Colors.black,
+                  color: Color(0xFFCACACA),
                   size: 18,
                 ),
                 const SizedBox(width: 5),
@@ -44,8 +49,8 @@ class BottomBarFooterContentState
                     loading: () => 0.0.kmphString,
                   ),
                   style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 15,
+                    color: Color(0xFFCACACA),
+                    fontSize: 13,
                   ),
                 ),
               ],
@@ -85,15 +90,17 @@ class BottomBarFooterContentState
                 error: (e, st) => [],
                 loading: () => [],
               ),
-              NotificationsButton(
-                onNotificationsTap: () {
-                  if (isBottomSheetExpanded) {
-                    closeModalBottomSheet2(ref);
-                  } else {
-                    openModalBottomSheet2(ref);
-                  }
-                },
-              ),
+              if (widget.withNotifications) ...[
+                NotificationsButton(
+                  onNotificationsTap: () {
+                    if (isBottomSheetExpanded) {
+                      closeModalBottomSheet2(ref);
+                    } else {
+                      openModalBottomSheet2(ref);
+                    }
+                  },
+                ),
+              ],
             ],
           ),
         ],

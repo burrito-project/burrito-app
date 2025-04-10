@@ -25,21 +25,19 @@ void main() async {
 
   registerSession();
 
+  // White background, black text (hour, icons)
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      statusBarColor: colorThemes['primary'],
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.white,
+      systemNavigationBarColor: Colors.white,
+      systemNavigationBarIconBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: colorThemes['primary'],
-      systemNavigationBarDividerColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.dark,
+      systemStatusBarContrastEnforced: false,
+      systemNavigationBarContrastEnforced: false,
     ),
   );
 
-  SystemChrome.setEnabledSystemUIMode(
-    SystemUiMode.edgeToEdge,
-    overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
-  );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
@@ -52,10 +50,15 @@ void main() async {
         title: 'Burrito UNMSM',
         theme: BurritoMobileTheme.theme,
         debugShowCheckedModeBanner: false,
-        home: const SafeArea(
-          child: PopupNotificationsWrapper(
-            child: PendingUpdatesWrapper(
-              child: BurritoApp(),
+        home: PopupNotificationsWrapper(
+          child: PendingUpdatesWrapper(
+            child: Container(
+              // color: colorThemes['primary'],
+              color: const Color(0xff470302),
+              child: const SafeArea(
+                bottom: false,
+                child: BurritoApp(),
+              ),
             ),
           ),
         ),

@@ -29,7 +29,9 @@ class PendingUpdatesWrapperState extends ConsumerState<PendingUpdatesWrapper> {
 
         final latestAck = getLatestAcknowledgedVersion() ?? '1.0.0';
         if (!response.mustUpdate &&
-            latestAck.compareTo(response.versions.first.semver) >= 0) return;
+            latestAck.compareTo(response.versions.first.semver) >= 0) {
+          return;
+        }
 
         await closeModalBottomSheet2(ref);
 
