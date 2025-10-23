@@ -1,5 +1,7 @@
 # Burrito App
 
+Full documentation hosted at <https://burrito-project.github.io/docs/overview.html>
+
 Status: production ready
 
 The app that students use to check the bus status. It consumes the status
